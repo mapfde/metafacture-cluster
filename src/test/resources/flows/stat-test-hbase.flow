@@ -1,0 +1,9 @@
+default table = "cg";
+default host = "borges";
+default id = "DNB-997724587";
+default stat = "relatorCodes";
+
+table + "/row/" + id | from-hbase(host) | 
+morph("statistics/"+stat+".xml")|
+encode("pretty-print")|
+write("stdout");

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Extract</name>
+	</meta>
+	<rules>
+
+
+		<!-- Sucht partOf Einträge bei den Children und trägt bei den Eltern die hasChild nach -->
+		<combine name="{to:${id}}cg:hasChild" value="${child}"
+			reset="false">
+			<data source="_id" name="child" />
+			<data source="cg:partOf" name="id" />
+		</combine>
+
+		<!-- extract the payload; the data that we want to write to the bundle
+		<data source="cg:issued" name="payload" /> -->
+
+	</rules>
+
+</metamorph>

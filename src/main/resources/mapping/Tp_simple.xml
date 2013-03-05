@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	version="1" entityMarker=".">
+	<meta>
+		<name>Umsetzung der GND Personen</name>
+	</meta>
+	<rules>
+
+		<data source="008A.a" name="tbstk" />
+		<data source="002@.0" name="satzart">
+			<substring end="2" />
+		</data>
+		<data source="002@.0" name="katlevel">
+			<substring start="2" end="3" />
+		</data>
+
+		<data source="042A.a" name="sysnummer" />
+		<data source="004B.a" name="entcode"/>
+
+
+		<!-- 100 -->
+		<combine name="aform"
+			value="${personalname}${surname}${forename}${prefix}${addition}"
+			flushWith="028A" reset="true">
+			<data source="028A.P" name="personalname" />
+			<data source="028A.a" name="surname" />
+			<data source="028A.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028A.c" name="prefix">
+				<compose prefix=" " />
+			</data>
+			<concat name="addition" prefix=" &lt;" postfix="&gt;"
+				delimiter=", " flushWith="028A" reset="true">
+				<data source="028A.n" />
+				<data source="028A.l" />
+				<data source="028A.g" />
+			</concat>
+		</combine>
+
+	</rules>
+
+	<maps>
+	</maps>
+</metamorph>

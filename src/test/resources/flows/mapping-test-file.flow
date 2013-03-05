@@ -1,0 +1,8 @@
+default type = "file";
+
+file|
+open(type)|
+read("marc21")|
+//morph("mapping/ingest.marc21.xml")|
+encode("pretty-print")|
+write("stdout");

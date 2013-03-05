@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>RVK Patterns</name>
+	</meta>
+	<rules>
+
+			<data source="cg:rvk" name="">
+				<case to="upper"/>
+				
+				<replace pattern="[A-Z]" with="C"/>
+				<replace pattern="\d" with="D"/>
+				<replace pattern="\W" with="-"/>
+			</data>
+
+	</rules>
+</metamorph>

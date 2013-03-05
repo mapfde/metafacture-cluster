@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+
+	<rules>
+		<data source="cg:bundledIn" name="_id" />
+
+		<combine name="@couple" value="">
+			<data source="cg:ddc" />
+			<data source="cg:rvk" />
+		</combine>
+
+		<combine name="@couple" value="">
+			<data source="cg:ddc" />
+			<data source="cg:subj" />
+		</combine>
+
+		<combine name="@couple" value="">
+			<data source="cg:subj" />
+			<data source="cg:rvk" />
+		</combine>
+
+		<combine name="cg:rvk" value="${id}:${value}" reset="false">
+			<data source="_id" name="id" />
+			<data source="cg:rvk" name="value">
+				<buffer />
+			</data>
+			<data source="cg:bundledIn|@couple" />
+		</combine>
+
+		<combine name="cg:subj" value="${id}:${value}" reset="false">
+			<data source="_id" name="id" />
+			<data source="cg:subj" name="value">
+				<buffer />
+			</data>
+			<data source="cg:bundledIn|@couple" />
+		</combine>
+
+
+		<combine name="cg:ddc" value="${id}:${value}" reset="false">
+			<data source="_id" name="id" />
+			<data source="cg:ddc" name="value">
+				<buffer />
+			</data>
+			<data source="cg:bundledIn|@couple" />
+		</combine>
+
+
+
+
+	</rules>
+
+</metamorph>

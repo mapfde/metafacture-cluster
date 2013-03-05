@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Subject references per year</name>
+	</meta>
+	<rules>
+
+		<data source="dcterms:issued" name="@y">
+			<regexp match="\d\d\d\d" />
+			<lookup>
+				<entry name="1980" value="1980" />
+				<entry name="1981" value="1980" />
+				<entry name="1982" value="1982" />
+				<entry name="1983" value="1982" />
+				<entry name="1984" value="1984" />
+				<entry name="1985" value="1984" />
+				<entry name="1986" value="1986" />
+				<entry name="1987" value="1986" />
+				<entry name="1988" value="1988" />
+				<entry name="1989" value="1988" />
+				<entry name="1990" value="1990" />
+				<entry name="1991" value="1990" />
+				<entry name="1992" value="1992" />
+				<entry name="1993" value="1992" />
+				<entry name="1994" value="1994" />
+				<entry name="1995" value="1994" />
+				<entry name="1996" value="1996" />
+				<entry name="1997" value="1996" />
+				<entry name="1998" value="1998" />
+				<entry name="1999" value="1998" />
+				<entry name="2000" value="2000" />
+				<entry name="2001" value="2000" />
+				<entry name="2002" value="2002" />
+				<entry name="2003" value="2002" />
+				<entry name="2004" value="2004" />
+				<entry name="2005" value="2004" />
+				<entry name="2006" value="2006" />
+				<entry name="2007" value="2006" />
+				<entry name="2008" value="2008" />
+				<entry name="2009" value="2008" />
+				<entry name="2010" value="2010" />
+				<entry name="2011" value="2010" />
+			</lookup>
+		</data>
+
+		<combine name="" value="${r}$${y}">
+			<data source="cg:subj.ref" name="r">
+				<trim />
+			</data>
+			<data source="@y" name="y" />
+		</combine>
+
+		<combine name="" value="#$${y}">
+			<data source="cg:subj.ref" name="r">
+				<trim />
+			</data>
+			<data source="@y" name="y" />
+		</combine>
+
+
+	</rules>
+</metamorph>

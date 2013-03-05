@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1"
+	entityMarker=".">
+
+	<meta>
+		<name>Index Schema</name>
+	</meta>
+
+	<rules>
+		<data source="_id" />
+
+		<group name="id">
+			<combine name="id" value="${id}">
+				<data source="_id" name="id" />
+				<data source="cg:type">
+					<not-equals string="bundle" />
+				</data>
+			</combine>
+
+			<data source="cg:srcId" />
+			<data source="bibo:isbn13" />
+			<data source="cg:ismn" />
+			<data source="bibo:gtin14" />
+			<data source="bibo:doi" />
+			<data source="cg:urn" />
+			<data source="bibo:handle" />
+			<data source="bibo:issn" />
+			<data source="cg:dnb" />
+			<data source="cg:zdb" />
+			<data source="cg:eki" />
+			<data source="cg:bnb" />
+			<data source="cg:cll" />
+			<data source="cg:ekz" />
+			<data source="cg:bnf" />
+			<data source="cg:loc" />
+			<data source="cg:oclc" />
+			<data source="cg:uniScript" />
+		</group>
+
+		<data name="issued" source="dcterms:issued" />
+
+		<data name="type" source="cg:type"/>
+
+		<group name="title">
+			<data source="dcterms:title" />
+			<data source="cg:addTitle" />
+			<data source="cg:uniTitle" />
+		</group>
+
+		<data name="creator" source="cg:creator.name|cg:creator.ref">
+			<trim />
+		</data>
+
+		<group name="name">
+			<data source="cg:prefName" />
+			<data source="cg:varName" />
+		</group>
+
+		<group name="context">
+			<data source="cg:subj.name|cg:subj.ref" />
+			<data source="cg:dewp_cat" />
+			<data source="cg:geo" />
+			<data source="cg:bio" />
+			<data source="cg:rel.value|cg:rel.ref" />
+			<data source="gnd:gender" />
+			<data source="cg:death">
+				<compose prefix="Gestorben " />
+			</data>
+			<data source="cg:birth">
+				<compose prefix="Geboren " />
+			</data>
+			<data source="gnd:studyPathsOfThePerson">
+				<compose prefix="Studium " />
+			</data>
+		</group>
+
+		<data name="publisher" source="cg:publisherName" />
+
+
+
+
+
+		<choose>
+			<data name="size" source="cg:contains">
+				<count />
+			</data>
+		</choose>
+
+
+
+
+
+		<data name="contains" source="cg:contains" />
+
+
+
+
+		<combine name="alg" value="${alg}">
+			<data source="cg:type">
+				<equals string="bundle" />
+			</data>
+			<data source="_id" name="alg">
+				<regexp match="^((.*?))\$" format="${1}" />
+			</data>
+		</combine>
+
+	</rules>
+
+	<maps>
+		<map name="textfields">
+			<entry name="title" />
+			<entry name="name" />
+			<entry name="creator" />
+			<entry name="publisher" />
+			<entry name="context" />
+		</map>
+	</maps>
+
+</metamorph>

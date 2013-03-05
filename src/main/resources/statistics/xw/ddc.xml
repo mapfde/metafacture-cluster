@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>DDC frequency by level</name>
+	</meta>
+	<rules>
+			<data source="cg:ddc" name="#">
+				<constant value=""/>
+			</data>
+
+			<data source="cg:ddc" name="@ddc">
+				<replace pattern="[^\d]" with=""/>
+			</data>
+			
+			<data source="@ddc" name=""/>
+			
+			<data source="@ddc">
+				<replace pattern="\d$" with=""/>
+				<not-equals string=""/>
+			</data>
+	</rules>
+</metamorph>

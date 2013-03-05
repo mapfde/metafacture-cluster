@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+
+	<meta>
+		<name>URL types</name>
+	</meta>
+	
+	<rules>
+
+		<combine name="" value="${I}-${T}" reset="false">
+		
+			<choose flushWith="cg:onlineRes" name="T">
+				<data source="cg:onlineRes.type" >
+					<trim />
+					<case to="lower" />
+				</data>
+				<data source="cg:onlineRes">
+					<constant value="NULL" />
+				</data>
+			</choose>
+			
+			<data source="_id" name="I">
+				<substring end="3" />
+			</data>
+			
+		</combine>
+
+	</rules>
+
+</metamorph>

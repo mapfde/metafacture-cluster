@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	entityMarker="." version="1">
+
+	<meta>
+		<name>PicaPlus to PropertyRecord</name>
+		<annotation>DEPRECATED!</annotation>
+	</meta>
+
+	<rules>
+		<data source="_id" name="cg:type">
+			<constant value="bib" />
+		</data>
+
+		<data source="002@.0" name="cg:modeOfIssuance">
+			<substring start="1" end="2" />
+			<lookup in="workList" />
+		</data>
+
+		<data source="002@.0" name="dcterms:format">
+			<substring start="0" end="1" />
+			<lookup in="material" />
+		</data>
+
+		<!-- <data source="013H.0" name="dcterms:format"> -->
+		<!-- </data> -->
+
+		<data source="002@.0" name="cg:typeOfWork">
+			<substring start="1" end="2" />
+			<lookup in="typeList" />
+		</data>
+
+		<data source="003@.0" name="cg:sourceRecordId" />
+
+		<data source="004A.0" name="bibo:isbn13">
+			<isbn to="isbn13" />			
+		</data>
+
+		<data source="004F.0" name="cg:ismn" />
+
+		<data source="004K.0" name="bibo:gtin14" />
+
+		<!-- <data source="004M.0" name="cg:isrn" /> -->
+
+		<data source="004P.0" name="bibo:doi" />
+
+		<data source="004U.0" name="cg:uniformResourceName" />
+
+		<data source="004R.0" name="bibo:handle" />
+
+		<data source="005I.0" name="bibo:issn" />
+
+		<data source="006Y.0" name="xbib:identifierPatent" />
+
+		<group name="cg:dnb">
+			<data source="006Y.0" />
+			<data source="003@.0" />
+		</group>
+
+		<data source="006Z.0" name="cg:zdb" />
+
+		<combine name="cg:eki" value="${prefix}${id}">
+			<data source="007G.a" name="prefix" />
+			<data source="007G.0" name="id" />
+		</combine>
+
+		<data source="007Ha.0" name="cg:idRegioKOBV" />
+		<data source="007Hd.0" name="cg:idRegioHBZ" />
+		<data source="007He.0" name="cg:idRegioHEBIS" />
+		<data source="007Hf.0" name="cg:idRegioBSZ" />
+		<data source="007Hg.0" name="cg:idRegioBVB" />
+		<data source="007Hh.0" name="cg:idRegioGBV" />
+
+		<data source="007Ib.0" name="cg:bnb" />
+		<data source="007Ic.0" name="cg:casaliniLibri" />
+		<data source="007Ie.0" name="cg:ekz" />
+		<data source="007Ig.0" name="cg:bnf" />
+		<data source="007Il.0" name="cg:loc" />
+		<data source="007Io.0" name="cg:oclc" />
+
+		<data source="007E.0" name="cg:universityScript" />
+
+		<!-- <data source="007P.0" name="xbib:fingerprint" /> -->
+
+		<data source="010@.a" name="dcterms:language" />
+
+		<data source="010@.c" name="cg:originLanguage" />
+
+		<data source="011@.a" name="dcterms:issued" />
+
+		<!-- <group name="dcterms:issued"> -->
+		<!-- <data source="011@.a" /> -->
+		<!-- <data source="011@.n" /> -->
+		<!-- </group> -->
+
+
+
+		<data source="019@a" name="cg:countryCodeIso" />
+
+		<!-- monographien -->
+		<data source="021A.a" name="dcterms:title" />
+
+		<!-- band -->
+		<concat delimiter=", " name="dcterms:title">
+			<data source="021B.a" />
+		</concat>
+
+
+
+		<data source="021A.d" name="cg:additionToTitle" />
+
+		<concat delimiter=", " name="cg:additionToTitle">
+			<data source="021B.d" />
+		</concat>
+
+		<data source="022A/01.a" name="cg:uniformTitle" />
+
+
+
+		<data source="021A.9" name="cg:broaderWorkId" />
+
+		<data source="021B.l" name="dcterms:volume" />
+
+		<data source="032@.a" name="cg:edition" />
+
+		<group name="cg:creatorDNBGND">
+			<data source="028A.9" />
+			<data source="028B/01.9" />
+			<data source="028B/02.9" />
+		</group>
+
+		<combine name="dcterms:creator"
+			value="${surname}${forename}${prefix}${personalname}${qualifier}"
+			flushWith="028A">
+			<data source="028A.a" name="surname" />
+			<data source="028A.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028A.c" name="prefix">
+				<compose prefix=" " />
+			</data>
+			<data source="028A.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+			<data source="028A.5" name="personalname" />
+		</combine>
+
+		<combine name="dcterms:creator"
+			value="${surname}${forename}${prefix}${personalname}${qualifier}"
+			flushWith="028B/01">
+			<data source="028B/01.a" name="surname" />
+			<data source="028B/01.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028B/01.c" name="prefix">
+				<compose prefix=" " />
+			</data>
+			<data source="028B/01.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+			<data source="028B/01.5" name="personalname" />
+		</combine>
+
+		<combine name="dcterms:creator"
+			value="${surname}${forename}${prefix}${personalname}${qualifier}"
+			flushWith="028B/02">
+			<data source="028B/02.a" name="surname" />
+			<data source="028B/02.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028B/02.c" name="prefix">
+				<compose prefix=" " />
+			</data>
+			<data source="028B/02.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+			<data source="028B/02.5" name="personalname" />
+		</combine>
+
+		<!-- <group name="rdaGr2:identifierForTheCorporateBody"> -->
+		<!-- <data source="029A.0" /> -->
+		<!-- </group> -->
+
+		<!-- <group name="cg:identifierForTheSecondaryCorporateBody"> -->
+		<!-- <data source="029F.0" /> -->
+		<!-- </group> -->
+
+		<!-- <group name="gnd:preferredNameForTheCorporateBody"> -->
+		<!-- <data source="029A.a" /> -->
+		<!-- <data source="029A.b" /> -->
+		<!-- </group> -->
+
+		<data source="033A.p" name="cg:publicationPlace" />
+		<data source="033A.n" name="cg:publisherName" />
+
+		<data source="034D.a" name="dcterms:extent" />
+
+		<group name="dcterms:isPartOf">
+			<data source="021A.9" />
+			<data source="036D.9" />
+			<data source="036F.9" />
+			<data source="039B.9" />
+			<data source="039C.9" />
+		</group>
+
+		<data source="034D.9" name="dcterms:isFormatOf" />
+
+	</rules>
+	<maps>
+		<map name="workList">
+			<entry name="a" value="bibo:Document" />
+			<entry name="b" value="bibo:Periodical" />
+			<entry name="c" value="bibo:Collection" />
+			<entry name="d" value="bibo:Series" />
+			<entry name="E" value="bibo:Collection" />
+			<entry name="F" value="bibo:Document" />
+			<entry name="f" value="bibo:Document" />
+			<entry name="l" value="bibo:Periodical" />
+		</map>
+
+		<map name="typeList" default="undefinedWork">
+			<entry name="a " value="independent" />
+			<entry name="F " value="independent" />
+			<entry name="c" value="dependent" />
+			<entry name="d" value="dependent" />
+			<entry name="E" value="dependent" />
+			<entry name="b" value="dependent" />
+			<entry name="f" value="dependent" />
+			<entry name="l" value="dependent" />
+			<entry name="p" value="dependent" />
+		</map>
+
+		<map name="material">
+			<entry name="A" value="books" />
+			<entry name="B" value="audiovisual" />
+			<entry name="C" value="brailles" />
+			<entry name="E" value="microfiches" />
+			<entry name="K" value="maps" />
+			<entry name="O" value="online" />
+			<entry name="S" value="discs" />
+			<entry name="Z" value="multimedia" />
+		</map>
+		<!-- <map name="statusList"> <entry name="a" value="provisorischerDatensatz" 
+			/> <entry name="c" value="DatensatzNeuerscheinungsdienst" /> <entry name="d" 
+			value="HssReiheH" /> <entry name="f" value="Fremddaten" /> <entry name="g" 
+			value="konvDatensHss " /> <entry name="h" value="konvZeitschriftenDaten" 
+			/> <entry name="l" value="konvDaten" /> <entry name="r" value="konvDaten" 
+			/> <entry name="s" value="konvDaten" /> <entry name="n" value="altDaten" 
+			/> <entry name="o" value="altDaten" /> <entry name="t" value="altDaten" /> 
+			</map> -->
+	</maps>
+</metamorph>

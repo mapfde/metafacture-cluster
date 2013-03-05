@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph-test version="1.0"
+	xmlns="http://www.culturegraph.org/metamorph-test" xmlns:mm="http://www.culturegraph.org/metamorph"
+	xmlns:cgxml="http://www.culturegraph.org/cgxml">
+
+	<test-case name="urls">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="DNB-1">
+					
+						<cgxml:entity name="cg:onlineRes">
+							<cgxml:literal name="url" value="http://www.dnb.de" />
+							<cgxml:literal name="type" value="Inhalt" />
+						</cgxml:entity>
+
+						<cgxml:entity name="cg:onlineRes">
+							<cgxml:literal name="url" value="http://www.dnb.de/notype" />
+						</cgxml:entity>
+
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+
+		<transformation type="text/x-metamorph+xml" src="statistics/urls.xml" />
+
+		<result type="text/x-cg+xml" strict-value-order="false"
+			strict-key-order="false">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="DNB-1">
+
+						<cgxml:literal name="" value="DNB-inhalt" />
+						<cgxml:literal name="" value="DNB-NULL" />
+
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+
+</metamorph-test>

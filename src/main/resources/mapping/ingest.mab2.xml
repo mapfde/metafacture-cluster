@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Mab2 to PropertyRecord</name>
+		<annotation>DEPRECATED</annotation>
+	</meta>
+
+
+	<rules>
+		<data source="_id" name="cg:type">
+			<constant value="bib" />
+		</data>
+
+		<data source="001" name="cg:srcId" />
+
+		<data source="010*" name="cg:partOf" />
+
+
+		<choose name="cg:level">
+			<data source="010*">
+				<constant value="part" />
+			</data>
+			<data source="_id">
+				<constant value="single" />
+			</data>
+		</choose>
+
+		<data source="025a" name="cg:dnb" />
+		<data source="025b" name="cg:bnb" />
+		<data source="025c" name="cg:cll" />
+		<data source="025f" name="cg:bnf" />
+		<data source="025l" name="cg:loc" />
+		<data source="025o" name="cg:oclc" />
+		<data source="025z" name="cg:zdb" />
+		<data source="026" name="cg:eki" />
+
+		<group name="cg:country">
+			<data source="036a" />
+			<data source="036b" />
+		</group>
+
+		<group name="dcterms:language">
+			<data source="037a" />
+			<data source="037b" />
+		</group>
+
+		<group name="cg:oLang">
+			<data source="038a" />
+			<data source="038b" />
+		</group>
+
+		<choose name="dcterms:format">
+			<data source="050">
+				<regexp match="^a.*" />
+				<constant value="book" />
+			</data>
+			<data source="050">
+				<regexp match="^...a.*" />
+				<constant value="brailles" />
+			</data>
+			<data source="050">
+				<regexp match="^..a.*" />
+				<constant value="microfiches" />
+			</data>
+			<data source="050">
+				<regexp match="^.........a.*" />
+				<constant value="map" />
+			</data>
+			<data source="050">
+				<regexp match="^......a.*" />
+				<constant value="multimedia" />
+			</data>
+			<data source="050">
+				<substring start="7" end="8" />
+				<lookup>
+					<entry name="g" value="online" />
+					<entry name="b" value="disc" />
+				</lookup>
+			</data>
+		</choose>
+
+
+		<entity name="cg:creator" flushWith="record">
+			<data name="name" source="100" />
+			<data name="name" source="100?">
+				<replace pattern="�\[.*\]�" with="" />
+			</data>
+			<data name="cnt" source="100|100?">
+				<constant value="1" />
+			</data>
+
+			<choose>
+				<data name="rel" source="100">
+					<constant value="aut" />
+				</data>
+				<data name="rel" source="100?">
+					<regexp match="�\[(.*)\]�" format="${1}" />
+					<lookup in="rel" />
+				</data>
+				<data name="rel" source="100?">
+					<constant value="und" />
+				</data>
+			</choose>
+			<data name="ref" source="102a" />
+		</entity>
+
+		<entity name="cg:creator" flushWith="record">
+			<data name="name" source="104" />
+			<data name="name" source="104?">
+				<replace pattern="�\[.*\]�" with="" />
+			</data>
+			<data name="cnt" source="104|104?">
+				<constant value="2" />
+			</data>
+
+			<choose>
+				<data name="rel" source="104">
+					<constant value="aut" />
+				</data>
+				<data name="rel" source="104?">
+					<regexp match="�\[(.*)\]�" format="${1}" />
+					<lookup in="rel" />
+				</data>
+				<data name="rel" source="104?">
+					<constant value="und" />
+				</data>
+			</choose>
+			<data name="ref" source="106a" />
+		</entity>
+
+		<entity name="cg:creator" flushWith="record">
+			<data name="name" source="108" />
+			<data name="name" source="108?">
+				<replace pattern="�\[.*\]�" with="" />
+			</data>
+			<data name="cnt" source="108|108?">
+				<constant value="2" />
+			</data>
+
+			<choose>
+				<data name="rel" source="108">
+					<constant value="aut" />
+				</data>
+				<data name="rel" source="108?">
+					<regexp match="�\[(.*)\]�" format="${1}" />
+					<lookup in="rel" />
+				</data>
+				<data name="rel" source="108?">
+					<constant value="und" />
+				</data>
+			</choose>
+			<data name="ref" source="110a" />
+		</entity>
+
+
+		<data source="331" name="dcterms:title" />
+
+		<data source="335" name="cg:addTitle" />
+
+		<data source="455" name="cg:volume" />
+
+		<group name="cg:edition">
+			<data source="400" />
+			<!-- <data source="403" /> -->
+		</group>
+
+		<data source="410" name="cg:pubPlace">
+		</data>
+		<data source="412" name="cg:pubName" />
+		<choose name="dcterms:issued">
+			<data source="426" />
+			<data source="425" />
+		</choose>
+		<data source="433" name="dcterms:extent" />
+
+
+		<data source="540a" name="bibo:isbn13">
+			<isbn to="isbn13" />
+		</data>
+
+		<data source="541a" name="cg:ismn" />
+		<data source="542a" name="bibo:issn" />
+
+
+		<data source="552a" name="bibo:doi" />
+		<data source="552b" name="cg:urn" />
+		<data source="552c" name="bibo:handle" />
+		<data source="553a" name="bibo:gtin14" />
+		<data source="554" name="cg:uniScript" />
+
+		<entity name="cg:onlineRes" flushWith="655e" reset="true">
+			<data source="655e.3" name="type" />
+			<data source="655e.u" name="url" />
+		</entity>
+
+		<entity name="cg:onlineRes" flushWith="655" reset="true">
+			<data source="655.3" name="type" />
+			<data source="655.u" name="url" />
+		</entity>
+
+		<entity name="cg:subj" reset="true">
+			<data name="ref" source="902s|902g">
+				<regexp match="[\d\-]{9,}" />
+			</data>
+			<data name="name" source="902s|902g">
+				<regexp match="[\d\-]{9,}\W*(.*)" format="${1}" />
+			</data>
+		</entity>
+
+
+
+		<group name="cg:ddc">
+			<data source="705a.a" />
+			<data source="705.a" />
+			<data source="700b" />
+			<postprocess>
+				<replace pattern="\|" with="" />
+			</postprocess>
+		</group>
+
+		<data source="700g" name="cg:rvk" />
+
+
+	</rules>
+	<maps>
+		<map name="rel" default="und">
+			<entry name="Hrsg." value="edt" />
+			<entry name="Mitarb." value="ctb" />
+			<entry name="Ill." value="ill" />
+		</map>
+	</maps>
+</metamorph>

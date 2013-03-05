@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+	<meta>
+		<name>ntcy2</name>
+	</meta>
+	<rules>
+		<combine name="key" value="${title}-${vol}-${edition}-${creator}-${year}"
+			reset="false">
+			<combine name="title" value="${title} ${add} ${part}"
+				flushWith="record">
+				<data source="dcterms:title" name="title" />
+				<data source="cg:additle" name="add" />
+				<data source="cg:partTitle" name="part" />
+				<postprocess>
+					<normalize-utf8 />
+					<replace pattern="[, \-\.;\)\(\]\[ @!?/\\]" with="" />
+					<case to="lower" />
+					<setreplace map="diacrit" />
+					<substring end="50" />
+					<regexp match=".{7}.*"/>
+				</postprocess>
+			</combine>
+			<data source="dcterms:issued" name="year">
+				<regexp match="\d\d\d\d" />
+			</data>
+
+			<choose name="vol">
+				<data source="dcterms:volume">
+					<regexp match="\d+" />
+				</data>
+				<data source="_id">
+					<constant value="X" />
+				</data>
+			</choose>
+
+			<choose name="edition">
+				<data source="cg:edition">
+					<regexp match="\d+" />
+				</data>
+				<data source="cg:edition">
+					<replace pattern="[, \-\.;\)\(\]\[ @!?/\\]" with="" />
+					<case to="lower" />
+					<trim />
+					<substring end="8" />
+				</data>
+				<data source="_id">
+					<constant value="X" />
+				</data>
+			</choose>
+
+			<data source="cg:creator.name" name="creator">
+				<regexp match="^([\p{L}\p{M}\-]*), ([\p{L}\p{M}]*)( .*)?$"
+					format="${1}${2}" />
+				<buffer />
+			</data>
+
+		</combine>
+	</rules>
+	<maps>
+		<map name="diacrit">
+			<entry name="ä" value="ae" />
+			<entry name="ü" value="ue" />
+			<entry name="ö" value="oe" />
+			<entry name="ß" value="ss" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="é" value="e" />
+			<entry name="ë" value="e" />
+			<entry name="ï" value="i" />
+			<entry name="á" value="a" />
+			<entry name="à" value="a" />
+			<entry name="è" value="e" />
+			<entry name="â" value="a" />
+			<entry name="ê" value="e" />
+			<entry name="å" value="a" />
+			<entry name="æ" value="ae" />
+			<entry name="ç" value="c" />
+			<entry name="œ" value="oe" />
+			<entry name="ñ" value="n" />
+			<entry name="&amp;" value="und" />
+			<entry name="" value="" />
+			<entry name="" value="" />
+		</map>
+	</maps>
+
+</metamorph>

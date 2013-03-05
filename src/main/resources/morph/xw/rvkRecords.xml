@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<rules>
+
+		<combine name="@couple" value="">
+			<data source="cg:ddc" />
+			<data source="cg:rvk" />
+		</combine>
+
+		<combine name="@couple" value="">
+			<data source="cg:subj" />
+			<data source="cg:rvk" />
+		</combine>
+
+		<combine name="@ddc" value="${value}" reset="false">
+			<data source="cg:ddc" name="value">
+				<buffer />
+			</data>
+			<data source="@couple" />
+		</combine>
+
+		<combine name="@rvk" value="${value}" reset="false">
+			<data source="cg:rvk" name="value">
+				<buffer />
+			</data>
+			<data source="@couple" />
+		</combine>
+
+		<combine name="@subj" value="${value}" reset="false">
+			<data source="cg:subj" name="value">
+				<buffer />
+			</data>
+			<data source="@couple" />
+		</combine>
+
+
+		<tuples name="@ddcR" separator=":" minN="2">
+			<data source="@rvk" name="1">
+				<regexp match="(.*):(.*)" format="${1}" />
+			</data>
+			<data source="@ddc" name="2">
+				<regexp match="(.*):(.*)" format="${2}" />
+			</data>
+		</tuples>
+
+		<tuples name="@subjR" separator=":" minN="2">
+			<data source="@rvk" name="1">
+				<regexp match="(.*):(.*)" format="${1}" />
+			</data>
+			<data source="@subj" name="2">
+				<regexp match="(.*):(.*)" format="${2}" />
+			</data>
+		</tuples>
+
+
+		<combine name="{to:${id}}cg:ddc" value="${v}" reset="true">
+			<data source="@ddcR" name="id">
+				<regexp match="(.*):(.*)" format="${1}" />
+			</data>
+			<data source="@ddcR" name="v">
+				<regexp match="(.*):(.*)" format="${2}" />
+			</data>
+		</combine>
+
+		<combine name="{to:${id}}cg:subj" value="${v}" reset="true">
+			<data source="@subjR" name="id">
+				<regexp match="(.*):(.*)" format="${1}" />
+			</data>
+			<data source="@subjR" name="v">
+				<regexp match="(.*):(.*)" format="${2}" />
+			</data>
+		</combine>
+
+
+		<combine name="{to:${id}}cg:rvk" value="${v}" reset="true">
+			<data source="@rvk" name="id">
+				<regexp match="(.*):(.*)" format="${1}" />
+			</data>
+			<data source="@rvk" name="v">
+				<regexp match="(.*):(.*)" format="${2}" />
+			</data>
+		</combine>
+
+	</rules>
+
+</metamorph>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="$"
+	version="1">
+
+	<rules>
+		<data name="@sachgruppe" source="045E$e" />
+		<data name="@jahr" source="011@$a">
+			<regexp match="\d\d\d\d" />
+		</data>
+
+		<combine name="" value="${jahr}$${sachgruppe}">
+			<choose name="sachgruppe">
+				<data  source="@sachgruppe" />
+				<data source="_id">
+					<constant value="unknown" />
+				</data>
+			</choose>
+
+			<choose name="jahr" >
+				<data source="@jahr" />
+				<data source="_id">
+					<constant value="unknown" />
+				</data>
+			</choose>
+		</combine>
+	</rules>
+</metamorph>

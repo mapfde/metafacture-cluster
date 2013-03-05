@@ -1,0 +1,11 @@
+default table = "cg-gnd-stat";
+default morphDef = "subj/GNDsimple.xml";
+default format = "pica";
+default in = "C:/bib_data/T-saetze.pica.gz";
+default filetype="gzip";
+
+in| 
+open(filetype)|
+read(format)|
+morph("morph/" + morphDef)|
+to-hbase(table +"@"+ host);

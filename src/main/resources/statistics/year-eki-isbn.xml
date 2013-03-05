@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	entityMarker="$" version="1">
+
+<meta>
+	<name>ISBNs und Ekis nach Jahr</name>
+</meta>
+<rules>
+	<data source="dcterms:issued" name="@epoch">
+		<regexp match="(\d\d\d)\d" format="${1}"/>
+		<compose postfix="0"/>
+	</data>
+	
+	<data source="cg:eki" name="@eki">
+		<constant value="EKI"/>
+	</data>
+	
+	<data source="bibo:isbn13" name="@isbn">
+		<constant value="ISBN"/>
+	</data>
+	
+	<data source="@epoch" name=""/>
+	
+	<combine name="" value="ISBN in ${epoch}" reset="true">
+		<data source="@epoch" name="epoch"/>
+		<data source="@isbn" name="isbn"/>
+	</combine>
+	
+	<combine name="" value="EKI in ${epoch}" reset="true">
+		<data source="@epoch" name="epoch"/>
+		<data source="@eki" name="eki"/>
+	</combine>
+	
+	</rules>
+</metamorph>

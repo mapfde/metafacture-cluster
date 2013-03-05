@@ -1,0 +1,10 @@
+default table = "cg-toc";
+default morphDef = "tocEnrich";
+default out = "stdout";
+default encode = "id-literal";
+
+
+table + "/scanner" | from-hbase(host) |
+morph("morph/"+morphDef+".xml")|
+encode(encode)|
+write(out);

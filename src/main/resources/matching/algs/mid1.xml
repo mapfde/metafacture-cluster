@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+	<meta>
+		<name>mid1</name>
+	</meta>
+	<rules>
+
+		<choose name="@OK">
+			<data source="cg:level">
+				<constant value="X" />
+			</data>
+			<data source="cg:partOf">
+				<constant value="X" />
+			</data>
+			<data source="_id">
+				<constant value="OK" />
+			</data>
+			<postprocess>
+				<equals string="OK" />
+			</postprocess>
+		</choose>
+
+
+		<data source="dcterms:issued" name="@year">
+			<regexp match="\d\d\d\d" />
+		</data>
+
+		<choose name="@volume">
+			<data source="dcterms:volume">
+				<regexp match="\d+" />
+			</data>
+			<data source="_id">
+				<constant value="X" />
+			</data>
+		</choose>
+
+		<choose name="@edition">
+			<data source="cg:edition">
+				<regexp match="\d+" />
+			</data>
+			<data source="cg:edition">
+				<replace pattern="[, \-\.;\)\(\]\[ @!?/\\]" with="" />
+				<case to="lower" />
+				<trim />
+				<substring end="8" />
+			</data>
+			<data source="_id">
+				<constant value="X" />
+			</data>
+		</choose>
+
+		<combine name="key" value="${eki}-E-${volume}-${edition}-${year}"
+			reset="false">
+			<data source="@edition" name="edition" />
+			<data source="@volume" name="volume" />
+			<data name="eki" source="cg:eki">
+				<trim />
+				<regexp match=".{6}.*" />
+				<buffer />
+			</data>
+			<data source="@year" name="year" />
+			<data source="@OK"/>
+		</combine>
+
+		<!-- <combine name="key" value="${oclc}-O-${volume}-${edition}-${year}" -->
+		<!-- reset="false"> -->
+		<!-- <data source="@edition" name="edition" /> -->
+		<!-- <data source="@volume" name="volume" /> -->
+		<!-- <data name="oclc" source="cg:oclc"> -->
+		<!-- <trim /> -->
+		<!-- <regexp match=".{6}.*" /> -->
+		<!-- </data> -->
+		<!-- <data source="@year" name="year" /> -->
+		<!-- </combine> -->
+
+		<combine name="key" value="${isbn}-I-${volume}-${edition}-${year}"
+			reset="false">
+			<data source="@edition" name="edition" />
+			<data source="@volume" name="volume" />
+			<data name="isbn" source="bibo:isbn13">
+				<buffer />
+			</data>
+			<data source="@year" name="year" />
+			<data source="@OK"/>
+		</combine>
+
+	</rules>
+</metamorph>

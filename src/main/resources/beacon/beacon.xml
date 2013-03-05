@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="$"
+	version="1">
+
+	<meta>
+		<name>BEACON</name>
+		<annotation>Diese Datei steuert die Erstellung der Rueckreferezen und die typ annotation fuer pnd saetze</annotation>
+	</meta>
+
+	<rules>
+		<data name="valid" source="002@$0">
+			<!-- Nur Referenzen auf die PND sind legitim desshalb muss der typ vermerkt 
+				werden -->
+			<substring end="2" />
+			<lookup><!-- Nur Tn und Tp Saetze werden in der Beacon Datei erfasst -->
+				<entry name="Tn" value="pnd" />
+				<entry name="Tp" value="pnd" />
+			</lookup>
+		</data>
+
+		<data name="_ref_type" source="002@$0">
+			<substring end="1" />
+ 			<lookup> <!--typ des Records der die Referenz enthaelt. Fuer jeden Typ wird eine BEACON Datei erzeugt -->
+				<entry name="G" value="dma" />
+				<entry name="M" value="dma" />
+				<entry name="A" value="bib" />
+				<entry name="B" value="bib" />
+				<entry name="C" value="bib" />
+				<entry name="E" value="bib" />
+				<entry name="K" value="bib" />
+				<entry name="O" value="bib" />
+				<entry name="S" value="bib" />
+				<entry name="Z" value="bib" />
+				<entry name="H" value="exil" />
+				<entry name="D" value="exil" />
+				<entry name="L" value="exil" />
+				<entry name="V" value="exil" />
+				<entry name="Q" value="exil" />
+			</lookup>
+		</data>
+
+
+		<group name="_ref_target">
+			<!-- Felder die Referenzen enthalten -->
+			<data source="028A$9" />
+			<data source="028B/01$9" />
+			<data source="028B/02$9" />
+			<data source="028B/03$9" />
+			<data source="028B/04$9" />
+
+			<data source="071B/071N$9" />
+			<data source="072B/072N$9" />
+			<data source="073B/073N$9" />
+			<data source="074B/074N$9" />
+			<data source="075B/075N$9" />
+			<data source="076B/076N$9" />
+			<data source="077B/077N$9" />
+			<data source="078B/078N$9" />
+			<data source="079B/079N$9" />
+
+			<data source="071C/071O$9" />
+			<data source="072C/072O$9" />
+			<data source="073C/073O$9" />
+			<data source="074C/074O$9" />
+			<data source="075C/075O$9" />
+			<data source="076C/076O$9" />
+			<data source="077C/077O$9" />
+			<data source="078C/078O$9" />
+			<data source="079C/079O$9" />
+
+			<data source="041A$9" />
+			<data source="041A/01$9" />
+			<data source="041A/02$9" />
+			<data source="041A/03$9" />
+			<data source="041A/04$9" />
+			<data source="041A/05$9" />
+		</group>
+	</rules>
+</metamorph>

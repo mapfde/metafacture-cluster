@@ -1,0 +1,8 @@
+default table = "cg";
+default host = "borges";
+
+
+table + "/scan/"| from-hbase(host) |
+morph("src/main/reaources/morph/subjectRefJoin.xml")|
+encode("pretty-print")|
+write("stdout");

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>sg2</name>
+	</meta>
+	<rules>
+
+
+
+		<tuples name="key" separator="-" minN="7">
+
+			<data name="title" source="dcterms:title">
+				<replace pattern="[, \-\.;\)\(\]\[ @!?/\\]" with="" />
+				<normalize-utf8 />
+				<case to="lower" />
+				<setreplace map="diacrit" />
+			</data>
+
+			<combine name="creator" value="${value}" sameEntity="true">
+				<data name="value" source="cg:creator.name">
+					<normalize-utf8 />
+					<regexp match="^(\p{L}*), (\p{L}*)( .*)?$" format="${1}${2}" />
+				</data>
+				<data source="cg:creator.rel" name="rel" >
+					<equals string="aut"/>
+				</data>
+
+			</combine>
+
+			<data name="issued" source="dcterms:issued">
+				<regexp match="\d\d\d\d" />
+			</data>
+
+			<data name="publisher" source="cg:pubName">
+				<occurrence only="1" />
+				<normalize-utf8 />
+				<case to="lower" />
+				<replace pattern="[, -]" with="" />
+				<setreplace map="diacrit" />
+				<setreplace map="apprev" />
+			</data>
+
+			<choose name="edition">
+				<data source="cg:edition">
+					<regexp match="\d+" format="${0}"/>
+				</data>
+				<data source="cg:edition">
+					<trim />
+				</data>
+				<data source="_id">
+					<constant value="X" />
+				</data>
+			</choose>
+
+			<choose name="volume">
+				<data source="dcterms:volume" />
+				<data source="_id">
+					<constant value="X" />
+				</data>
+			</choose>
+
+			<combine name="material" value="${mat}${form}">
+				<data name="mat" source="cg:material" />
+				<choose name="form">
+					<data source="cg:form" />
+					<data source="_id">
+						<constant value="X" />
+					</data>
+				</choose>
+			</combine>
+
+		</tuples>
+	</rules>
+
+	<maps>
+		<map name="diacrit">
+			<entry name="ä" value="ae" />
+			<entry name="ü" value="ue" />
+			<entry name="ö" value="oe" />
+			<entry name="ß" value="ss" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="é" value="e" />
+			<entry name="ë" value="e" />
+			<entry name="ï" value="i" />
+			<entry name="á" value="a" />
+			<entry name="à" value="a" />
+			<entry name="è" value="e" />
+			<entry name="â" value="a" />
+			<entry name="ê" value="e" />
+			<entry name="å" value="a" />
+			<entry name="æ" value="ae" />
+			<entry name="ç" value="c" />
+			<entry name="œ" value="oe" />
+			<entry name="ñ" value="n" />
+			<entry name="&amp;" value="und" />
+			<entry name="" value="" />
+			<entry name="" value="" />
+		</map>
+
+		<map name="apprev">
+			<entry name="universitaet" value="univ." />
+			<entry name="university" value="univ." />
+			<entry name="verlag" value="verl." />
+			<entry name="verlags" value="verl." />
+			<entry name="deutsch" value="dt." />
+			<entry name="deutsche" value="dt." />
+			<entry name="press" value="pr." />
+			<entry name="wissenschaft" value="wiss." />
+			<entry name="gesellschaft" value="ges." />
+			<entry name="europaeische" value="europ." />
+		</map>
+	</maps>
+
+</metamorph>

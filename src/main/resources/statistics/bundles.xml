@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="."
+	version="1">
+	<meta>
+		<name>Statistik ueber Match Gruppen</name>
+	</meta>
+
+	<rules>
+
+		<choose name="@size">
+			<data source="cg:contains">
+				<count />
+			</data>
+		</choose>
+
+<!-- 	<data source="@size" name="size"> -->
+<!-- 		<not-equals string="1"/> -->
+<!-- 	</data> -->
+		
+
+		<data name="@algorithm" source="_id">
+			<regexp match="^((.*?))\$" format="${1}" />
+		</data>
+
+		<combine name="${alg}$groups" value="">
+			<data name="alg" source="@algorithm" />
+			<data source="@size">
+				<not-equals string="1" />
+			</data>
+		</combine>
+
+		<combine name="${alg}$redirects" value="">
+			<data name="alg" source="@algorithm" />
+			<data source="cg:redirect"/>
+		</combine>
+
+		<combine name="${alg}$${size}" value="">
+			<data source="@algorithm" name="alg" />
+			<data source="@size" name="size" />
+		</combine>
+
+		<combine name="${alg}$${vrb}" value="" reset="false">
+			<data source="@size">
+				<not-equals string="1" />
+			</data>
+			<data source="@algorithm" name="alg" />
+			<data name="vrb" source="cg:contains">
+				<substring end="3" />
+				<buffer />
+			</data>
+		</combine>
+
+		<combine name="${alg}$total" value="" reset="false">
+			<data source="@size">
+				<not-equals string="1" />
+			</data>
+			<data source="@algorithm" name="alg" />
+			<data name="vrb" source="cg:contains">
+				<buffer />
+			</data>
+		</combine>
+
+
+
+	</rules>
+</metamorph>

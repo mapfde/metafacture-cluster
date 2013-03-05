@@ -1,0 +1,389 @@
+XA-FXFR	—
+XE-CTKI	—
+XM-JTUM	—
+XM-PUUM	—
+XA-CH-AG	Aargau
+XC-EG	Ägypten
+XC-GQ	Äquatorialguinea
+XC-ET	Äthiopien
+XB-AF	Afghanistan
+XC	Afrika
+XA-AX	Ålandinseln
+XA-AL	Albanien
+XA-AL	Albanien
+XC-DZ	Algerien
+XD	Amerika
+XM-UM	Amerikanische Überseeinseln
+XD-AS	Amerikanisch-Samoa
+XA-AD	Andorra
+XC-AO	Angola
+XD-AI	Anguilla
+XI-AQ	Antarktika
+XI	Antarktis
+XD-AG	Antigua und Barbuda
+XA-CH-AR	Appenzell <Ausserrhoden>
+XA-CH-AI	Appenzell <Innerrhoden>
+XD-AR	Argentinien
+XH	Arktis
+XB-AM	Armenien
+XD-AW	Aruba
+XB-AZ	Aserbaidschan
+XB	Asien
+XK	Atlantischer Ozean
+XE-AU	Australien
+XE	Australien, Ozeanien
+XA-DE-BW	Baden-Württemberg
+XD-BS	Bahamas
+XB-BH	Bahrain
+XB-BD	Bangladesch
+XD-BB	Barbados
+XA-CH-BS	Basel
+XA-CH-BL	Basel-Landschaft
+XA-DE-BY	Bayern
+XA-BE	Belgien
+XD-BZ	Belize
+XC-BJ	Benin
+XA-DE-BE	Berlin
+XD-BM	Bermudainseln
+XA-CH-BE	Bern <Kanton>
+XB-BT	Bhutan
+XB-MM	Birma
+XD-BO	Bolivien
+XD-BQ	Bonaire, Sint Eustatius, Saba <Insel>
+XA-BA	Bosnien-Herzegowina
+XC-BW	Botswana
+XK-BV	Bouvetinsel
+XA-DE-BB	Brandenburg
+XD-BR	Brasilien
+XA-DE-HB	Bremen
+XI-BQAQ	Britisches Antarktis-Territorium
+XL-IO	Britisches Territorium im Indischen Ozean
+XB-BN	Brunei
+XA-BG	Bulgarien
+XA-AT-1	Burgenland
+XC-BF	Burkina Faso
+XC-HVBF	Burkina Faso (Obervolta)
+XB-BUMM	Burma
+XC-BI	Burundi
+XD-KY	Cayman Islands
+XD-CL	Chile
+XB-CN	China
+XE-CX	Christmas Island <Australien>
+XE-CK	Cookinseln
+XD-CR	Costa Rica
+XD-CW	Curaçao
+XA-DK	Dänemark
+XC-DYBJ	Dahome
+XA-DE	Deutschland
+XA-DDDE	Deutschland <DDR>
+XA-DXDE	Deutschland, Deutsches Reich
+XD-DM	Dominica
+XD-DO	Dominikanische Republik
+XC-DJ	Dschibuti
+XC-AIDJ	Dschibuti (Französisches Afar- und Issa-Territorium)
+XD-EC	Ecuador
+XD-SV	El Salvador
+XC-CI	Elfenbeinküste
+XC-ER	Eritrea
+XA-EE	Estland
+XA	Europa
+XK-FO	Färöer
+XK-FK	Falklandinseln
+XE-FJ	Fidschi
+XA-FI	Finnland
+XA-FR	Frankreich
+XL-TF	Französische Südgebiete
+XD-GF	Französisch-Guayana
+XE-PF	Französisch-Polynesien
+XA-CH-FR	Freiburg <Üechtland, Kanton>
+XC-GA	Gabun
+XC-GM	Gambia
+XA-CH-GE	Genf <Kanton>
+XB-GE	Georgien
+XC-GH	Ghana
+XA-GI	Gibraltar
+XE-GEHH	Gilbertinseln
+XA-CH-GL	Glarus <Kanton>
+XA-CH-GR	Graubünden
+XD-GD	Grenada
+XA-GR	Griechenland
+XK-GL	Grönland
+XA-GB	Großbritannien
+XD-GP	Guadeloupe
+XE-GU	Guam
+XD-GT	Guatemala
+XA-GG	Guernsey
+XC-GN	Guinea
+XC-GW	Guinea-Bissau
+XD-GY	Guyana
+XD-HT	Haiti
+XA-DE-HH	Hamburg
+XI-HM	Heard und McDonaldinseln
+XA-DE-HE	Hessen
+XD-HN	Honduras
+XB-HK	Hongkong
+XB-IN	Indien
+XL	Indischer Ozean
+XB-ID	Indonesien
+XB-IQ	Irak
+XB-IR	Iran
+XA-IE	Irland
+XA-IS	Island
+XB-IL	Israel
+XA-IT	Italien
+XD-JM	Jamaika
+XB-JP	Japan
+XB-YE	Jemen
+XB-YDYE	Jemen <Demokratische Volksrepublik>
+XA-JE	Jersey
+XB-JO	Jordanien
+XA-YUCS	Jugoslawien <Föderative Republik>, Jugoslawien
+XD-VG	Jungferninseln <Großbritannien>
+XD-VI	Jungferninseln <USA>
+XA-CH-JU	Jura <Kanton>
+XA-AT-2	Kärnten
+XB-KH	Kambodscha
+XC-CM	Kamerun
+XD-CA	Kanada
+XC-CV	Kapverdische Inseln
+XB-KZ	Kasachstan
+XB-QA	Katar
+XC-KE	Kenia
+XB-KG	Kirgisien
+XE-KI	Kiribati
+XI-NQAQ	Königin-Maud-Land
+XE-CC	Kokosinseln
+XD-CO	Kolumbien
+XC-KM	Komoren <Staat>
+XC-CD	Kongo <Demokratische Republik>
+XC-ZRCD	Kongo <Demokratische Republik> (Zaire)
+XC-CG	Kongo <Republik>
+XA-HR	Kroatien
+XD-CU	Kuba
+XB-KW	Kuwait
+XB-LA	Laos
+XC-LS	Lesotho
+XA-LV	Lettland
+XB-LB	Libanon
+XC-LR	Liberia
+XC-LY	Libyen
+XA-LI	Liechtenstein
+XA-LT	Litauen
+XA-LU	Luxemburg
+XA-CH-LU	Luzern <Kanton>
+XB-MO	Macao
+XC-MG	Madagaskar
+XA-MK	Makedonien
+XC-MW	Malawi
+XB-MY	Malaysia
+XB-MV	Malediven
+XC-ML	Mali
+XA-MT	Malta
+XA-IM	Man <Insel>
+XC-MA	Marokko
+XE-MH	Marshallinseln
+XD-MQ	Martinique
+XC-MR	Mauretanien
+XC-MU	Mauritius
+XC-YT	Mayotte
+XA-DE-MV	Mecklenburg-Vorpommern
+XD-MX	Mexiko
+XM-MIUM	Midway Islands
+XE-FM	Mikronesien <Staat>
+XC-MZ	Moçambique
+XA-MD	Moldawien
+XA-MC	Monaco
+XB-MN	Mongolei
+XA-ME	Montenegro
+XD-MS	Montserrat <Insel>
+XC-NA	Namibia
+XE-NR	Nauru
+XB-NP	Nepal
+XA-CH-NE	Neuenburg <Schweiz, Kanton>
+XE-NC	Neukaledonien
+XE-NZ	Neuseeland
+XD-NI	Nicaragua
+XA-CH-NW	Nidwalden
+XD-ANHH	Niederländische Antillen
+XA-NL	Niederlande
+XA-AT-3	Niederösterreich
+XA-DE-NI	Niedersachsen
+XC-NE	Niger
+XC-NG	Nigeria
+XM-NU	Niue
+XE-MP	Nördliche Marianen
+XB-KP	Nordkorea
+XA-DE-NW	Nordrhein-Westfalen
+XE-NF	Norfolk-Insel
+XA-NO	Norwegen
+XA-AT-4	Oberösterreich
+XA-CH-OW	Obwalden
+XA-AT	Österreich
+XA-AAAT	Österreich (-12.11.1918)
+XB-OM	Oman
+XB-TL	Osttimor
+XB-TPTL	Osttimor
+XE-PCHH	Ozeanien
+XB-PK	Pakistan
+XE-PW	Palauinseln
+XB-PS	Palestine Territory
+XD-PA	Panama
+XD-PZPA	Panamakanalzone
+XE-PG	Papua-Neuguinea
+XD-PY	Paraguay
+XM	Pazifischer Ozean
+XD-PE	Peru
+XB-PH	Philippinen
+XM-PN	Pitcairn
+XA-PL	Polen
+XA-PT	Portugal
+XD-PR	Puerto Rico
+XL-RE	Réunion
+XA-DE-RP	Rheinland-Pfalz
+XA-RO	Rumänien
+XA-RU	Russland
+XC-RW	Rwanda
+XA-DE-SL	Saarland
+XA-DE-SN	Sachsen
+XA-DE-ST	Sachsen-Anhalt
+XD-KN	Saint Kitts und Nevis
+XD-LC	Saint Lucia
+XD-VC	Saint Vincent and the Grenadines
+XD-BL	Saint-Barthélemy <Kleine Antillen>
+XD-MF	Saint-Martin <Kleine Antillen, Nord>
+XD-PM	Saint-Pierre-et-Miquelon
+XE-SB	Salomonen
+XA-AT-5	Salzburg <Land>
+XC-ZM	Sambia
+XA-SM	San Marino
+XA-CH-SG	Sankt Gallen <Kanton>
+XK-SH	Sankt Helena
+XC-ST	Sao Tomé und Príncipe
+XB-SA	Saudi-Arabien
+XA-CH-SH	Schaffhausen <Kanton>
+XA-DE-SH	Schleswig-Holstein
+XA-SE	Schweden
+XA-CH	Schweiz
+XA-CH-SZ	Schwyz <Kanton>
+XC-SN	Senegal
+XA-RS	Serbien
+XA-CSXX	Serbien-Montenegro
+XC-SC	Seychellen
+XC-SL	Sierra Leone
+XB-SKIN	Sikkim
+XC-ZW	Simbabwe
+XC-RHZW	Simbabwe (Rhodesien)
+XB-SG	Singapur
+XD-SX	Sint Maarten
+XA-SK	Slowakei
+XA-SI	Slowenien
+XA-CH-SO	Solothurn <Kanton>
+XC-SO	Somalia
+XA-SUHH	Sowjetunion
+XA-ES	Spanien
+XB-LK	Sri Lanka
+XA-AT-6	Steiermark
+XC-SD	Sudan
+XC-ZA	Südafrika <Staat>
+XK-GS	Südgeorgien und Südliche Sandwichinseln
+XB-KR	Südkorea
+XC-SS	Südsudan <Staat>
+XB-VDVN	Südvietnam
+XD-SR	Surinam
+XK-SJ	Svalbard und Jan Mayen
+XC-SZ	Swasiland
+XB-SY	Syrien
+XB-TJ	Tadschikistan
+XB-TW	Taiwan
+XC-TZ	Tansania
+XI-FQHH	Terres Australes et Antarctiques Françaises
+XA-CH-TI	Tessin
+XB-TH	Thailand
+XA-DE-TH	Thüringen
+XA-CH-TG	Thurgau
+XB-CN-54	Tibet
+XA-AT-7	Tirol
+XC-TG	Togo
+XE-TK	Tokelau
+XE-TO	Tonga
+XA-IT-32	Trentino-Südtirol
+XD-TT	Trinidad und Tobago
+XC-TD	Tschad
+XA-CZ	Tschechische Republik
+XA-CSHH	Tschechoslowakei
+XB-TR	Türkei
+XC-TN	Tunesien
+XB-TM	Turkmenistan
+XD-TC	Turks- und Caicos-Inseln
+XE-TV	Tuvalu
+XC-UG	Uganda
+XA-UA	Ukraine
+XA-HU	Ungarn
+XA-CH-UR	Uri
+XD-UY	Uruguay
+XD-US	USA
+XB-UZ	Usbekistan
+XE-VU	Vanuatu
+XE-NHVU	Vanuatu (Neue Hebriden)
+XA-VA	Vatikanstadt
+XD-VE	Venezuela
+XB-AE	Vereinigte Arabische Emirate
+XB-VN	Vietnam
+XA-AT-8	Vorarlberg
+XA-CH-VD	Waadt
+XM-WKUM	Wake Island
+XA-CH-VS	Wallis
+XE-WF	Wallis und Futuna
+XA-BY	Weißrussland
+XC-EH	Westsahara
+XE-WS	Westsamoa
+XA-AT-9	Wien
+XC-CF	Zentralafrikanische Republik
+XA-CH-ZH	Zürich <Kanton>
+XA-CH-ZG	Zug <Kanton>
+XA-CY	Zypern
+XX	Arabische Staaten, Araber
+XN	Extraterrestrika
+XZ	Fiktive Geografika
+XQ	Gesamte Welt, Übrige Welt
+XP	Internationale Staatengemeinschaften, internationale Organisationen, Internationale Körperschaft
+XY	Juden
+XW	Palästinenser in Geschichte und Gegenwart
+ZZ	Sonstiges Ausland, Unbekanntes Land
+XR	Alter Orient
+XU	Byzantinisches Reich
+XS	Griechenland (Altertum)
+XV	Osmanisches Reich
+XT	Römisches Reich
+XM-PUUM	Amerikanisches Territorium im Pazifik (-1986)
+XI-BQAQ	Britisches Antarktis-Territorium (-1979)
+XB-BUMM	Burma (-1989)
+XE-CTKI	Canton und Enderbury (-1984)
+XC-DYBJ	Dahome (-1977)
+XA-DDDE	Deutsche Demokratische Republik (-1990)
+XA-DXDE	Deutschland, Deutsches Reich
+XA-FXFR	Frankreich, Europäisches (1993-1997)
+XI-FQHH	Französische Süd- und Antarktisgebiete (-1979)
+XC-AIDJ	Französisches Afar- und Issa-Territorium (-1977)
+XE-GEHH	Gilbert-Inseln (-1979)
+XB-YDYE	Jemen (Demokratischer) (-1990)
+XM-JTUM	Johnston-Inseln (-1986)
+XA-YUCS	Jugoslawien (-2003)
+XI-NQAQ	Königin-Maud-Land (-1983)
+XM-MIUM	Midway (-1986)
+XE-NHVU	Neue Hebriden (-1980)
+NTHH	Neutrale Zone (-1993)
+XD-ANHH	Niederländische Antillen (1974-2011)
+XC-HVBF	Obervolta (-1984)
+XA-AAAT	Österreich (-12.11.1918)
+XB-TPTL	Osttimor (-2002)
+XD-PZPA	Panamakanalzone (-1980)
+XE-PCHH	Pazifikinseln (-1986)
+XA-CSXX	Serbien-Montenegro (2003-2006)
+XB-SKIN	Sikkim (-1975)
+XA-SUHH	Sowjetunion (-1992)
+XC-RHZW	Südrhodesien (-1980)
+XA-CSHH	Tschechoslowakei (-1993)
+XB-VDVN	Vietnam, Republik (-1977)
+XM-WKUM	Wake (-1986)
+XC-ZRCD	Zaire (-1997)

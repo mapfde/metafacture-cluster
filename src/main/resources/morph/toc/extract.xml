@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Online Resource and Bundle info for TOCII</name>
+	</meta>
+	<rules>
+		
+		<combine name="{to:${id}}cg:bundledIn" value="${bundle}"
+			reset="false">
+			<data source="_id" name="bundle" />
+			<data source="cg:contains" name="id" />
+		</combine>
+
+		<concat delimiter="," name="data">
+			<choose flushWith="cg:onlineRes">
+				<combine name="" value="${url}" reset="true" sameEntity="true">
+					<data source="cg:onlineRes.url" name="url" />
+					<data source="cg:onlineRes.type">
+						<regexp match="altsv" />
+					</data>
+				</combine>
+
+				<data source="cg:onlineRes.url">
+					<regexp match="^.*((_toc\.pdf)|(/tocs/)).*" />
+				</data>
+			</choose>
+
+		</concat>
+	</rules>
+
+</metamorph>

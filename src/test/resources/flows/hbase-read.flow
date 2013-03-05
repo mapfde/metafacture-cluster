@@ -1,0 +1,7 @@
+default table = "cg";
+default host = "borges";
+default id = "GBV-026658208";
+
+table + "/row/" + id | from-hbase(host) | 
+encode("pretty-print")|
+write("stdout");

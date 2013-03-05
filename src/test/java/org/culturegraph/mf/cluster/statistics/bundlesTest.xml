@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph-test version="1.0"
+	xmlns="http://www.culturegraph.org/metamorph-test" xmlns:mm="http://www.culturegraph.org/metamorph"
+	xmlns:cgxml="http://www.culturegraph.org/cgxml">
+
+	<test-case name="contains count">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="animals$hc1">
+						<cgxml:literal name="cg:contains" value="DNB-hamster"/>
+						<cgxml:literal name="cg:contains" value="DNB-cat"/>
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+
+		<transformation type="text/x-metamorph+xml" src="statistics/bundles.xml" />
+
+		<result type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="animals$hc1">
+						<cgxml:literal name="animals$groups" value=""/>
+						<cgxml:literal name="animals$2" value=""/>
+						<cgxml:literal name="animals$DNB" value=""/>
+						<cgxml:literal name="animals$DNB" value=""/>
+						<cgxml:literal name="animals$total" value=""/>
+						<cgxml:literal name="animals$total" value=""/>
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+	
+		<test-case name="contains redirect">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="animals$hc1">
+						<cgxml:literal name="cg:redirect" value="animals$hula"/>
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+
+		<transformation type="text/x-metamorph+xml" src="statistics/bundles.xml" />
+
+		<result type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="animals$hc1">
+						<cgxml:literal name="animals$redirects" value=""/>
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+	
+	
+	
+
+</metamorph-test>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<rules>
+		<data source="cg:oLang" name="">
+			<compose prefix="o-" />
+		</data>
+		<data source="dcterms:language" name="">
+			<compose prefix="l-" />
+		</data>
+		<combine name="" value="t-${o}-${l}" reset="false">
+			<concat delimiter="/" name="l">
+				<data source="dcterms:language" name="l" />
+			</concat>
+			<data source="cg:oLang" name="o" />
+		</combine>
+	</rules>
+</metamorph>

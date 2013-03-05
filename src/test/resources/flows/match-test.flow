@@ -1,0 +1,13 @@
+default idnfile = "src/test/resources/idns.txt";
+default alg = "wrk";
+
+idnfile|
+open("file")|
+as-lines|
+template("https://portal.dnb.de/opac.htm?method=requestMarcXml&idn=${obj}")|
+open("http")|
+read("marcxml")|
+morph("mapping/ingest.marc21.xml")|
+morph("matching/algs/" + alg + ".xml")|
+encode("pretty-print")|
+write("stdout");

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>german wikipedia catagories</name>
+	</meta>
+	<rules>
+
+		<combine name="{to:${id}}cg:dewp_cat" value="${value}" reset="false">
+			<data name="value" source="ref">
+				<regexp match="^Kategorie:(.*)" format="${1}" />
+				<buffer flushWith="record" />
+			</data>
+			<data name="id" source="pnd" />
+		</combine>
+
+		<combine name="{to:${id}}cg:imdb" value="${value}">
+			<data name="value" source="imdb" />
+			<data name="id" source="pnd" />
+		</combine>
+
+		<combine name="{to:${id}}cg:dewp" value="${value}">
+			<data name="value" source="PAGE_ID" />
+			<data name="id" source="pnd" />
+		</combine>
+
+	</rules>
+
+</metamorph>

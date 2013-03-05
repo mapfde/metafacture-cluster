@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="."
+	version="1">
+	<meta>
+		<name></name>
+	</meta>
+
+	<rules>
+		<combine name="{to:${to}}cg:bundledIn" value="${value}">
+			<data name="to" source="cg:contains" />
+			<data source="_id" name="value" />
+		</combine>
+	</rules>
+</metamorph>

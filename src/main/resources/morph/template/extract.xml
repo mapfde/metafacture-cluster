@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Extract</name>
+		<annotation>This is executed in the Map phase</annotation>
+	</meta>
+	<rules>
+
+
+		<!-- reverse the cg:bundledIn relation so that we have a pointer from the 
+			record back to the bundle -->
+		<combine name="{to:${id}}cg:bundledIn" value="${bundle}"
+			reset="false">
+			<data source="_id" name="bundle" />
+			<data source="cg:contains" name="id" />
+		</combine>
+
+		<!-- extract the payload; the data that we want to write to the bundle -->
+		<data source="cg:issued" name="payload" />
+
+	</rules>
+
+</metamorph>

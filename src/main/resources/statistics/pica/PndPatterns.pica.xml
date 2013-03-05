@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1"
+	entityMarker="$">
+
+	<meta>
+		<name>Statistik ueber Muster fuer Lebenszeitangaben</name>
+	</meta>
+	<rules>
+		<data name="" source="032Aa$a">
+			<replace pattern="([\d])+" with="N" />
+			<compose prefix="[" postfix="]" />
+
+		</data>
+	</rules>
+</metamorph>

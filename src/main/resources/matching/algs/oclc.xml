@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+	<meta>
+		<name>oclc</name>
+		<annotation>Matching based on the OCLC number</annotation>
+	</meta>
+	<rules>
+		<data name="key" source="cg:oclc">
+			<trim/>
+		</data>
+	</rules>
+</metamorph>

@@ -1,0 +1,89 @@
+/*
+ *  Copyright 2013 Deutsche Nationalbibliothek
+ *
+ *  Licensed under the Apache License, Version 2.0 the "License";
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph-test version="1.0"
+	xmlns="http://www.culturegraph.org/metamorph-test" xmlns:mm="http://www.culturegraph.org/metamorph"
+	xmlns:cgxml="http://www.culturegraph.org/cgxml">
+
+	<test-case name="match isbn simple">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="bibo:isbn13" value="isbn1"/>
+						<cgxml:literal name="bibo:isbn13" value="isbn2"/>
+						<cgxml:literal name="cg:edition" value="hurz 1"/>
+					</cgxml:record>
+					<cgxml:record id="2">
+						
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+		
+		<transformation type="text/x-metamorph+xml" src="matching/algs/ive1.xml" />
+		
+		<result type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="key" value="isbn1-X-1"/>
+						<cgxml:literal name="key" value="isbn2-X-1"/>
+					</cgxml:record>
+					<cgxml:record id="2">
+						
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+
+	<test-case name="match isbn with volume">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="bibo:isbn13" value="isbn1"/>
+						<cgxml:literal name="bibo:isbn13" value="isbn2"/>
+						<cgxml:literal name="cg:edition" value="hurz 1"/>
+						<cgxml:literal name="cg:volume" value="Band 5"/>
+					</cgxml:record>
+					<cgxml:record id="2">
+						
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+		
+		<transformation type="text/x-metamorph+xml" src="matching/algs/ive1.xml" />
+		
+		<result type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="key" value="isbn1-5-1"/>
+						<cgxml:literal name="key" value="isbn2-5-1"/>
+					</cgxml:record>
+					<cgxml:record id="2">
+						
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+	
+</metamorph-test>

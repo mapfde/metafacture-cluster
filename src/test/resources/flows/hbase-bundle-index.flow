@@ -1,0 +1,9 @@
+default host = "borges";
+default alg = "ntcy";
+
+"b-" + alg + "/scanner" | from-hbase(host) |
+filter("indexing/bundlefilter.xml")|
+//morph("indexing/datastore.xml")|
+//encode("pretty-print")|
+//write("stdout");
+stream-to-index("indexing/datastore.xml", indexpath="G://" + alg + "_ix");

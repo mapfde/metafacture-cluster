@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>DDC - GND</name>
+	</meta>
+	<rules>
+
+
+		<combine name="@ok" value="">
+			<data source="cg:subj" />
+			<data source="cg:ddc" />
+			<postprocess>
+				<occurrence only="1" />
+			</postprocess>
+		</combine>
+
+		<data source="@ok" name="">
+			<constant value="#" />
+		</data>
+
+		<combine name="" value="${v}" reset="false">
+			<data source="cg:subj" name="v">
+				<compose prefix="t" />
+				<buffer />
+			</data>
+			<data source="@ok" />
+		</combine>
+
+		<data source="cg:ddc" name="@ddcProt">
+			<replace pattern="[^\d]" with="" />
+			<not-equals string="" />
+			<compose prefix="s" />
+		</data>
+
+		<data source="@ddc|@ddcProt" name="@ddc">
+			<replace pattern="\d$" with="" />
+			<not-equals string="s" />
+		</data>
+
+
+		<combine name="" value="${v}" reset="false">
+			<data source="@ddc|@ddcProt" name="v">
+				<buffer />
+				<unique />
+			</data>
+			<data source="@ok" />
+		</combine>
+
+		<tuples name="" minN="2" separator="$">
+			<data source="@ddc|@ddcProt" name="1" />
+			<data source="cg:subj" name="2">
+				<compose prefix="t" />
+			</data>
+			<postprocess>
+				<unique />
+			</postprocess>
+		</tuples>
+	</rules>
+</metamorph>

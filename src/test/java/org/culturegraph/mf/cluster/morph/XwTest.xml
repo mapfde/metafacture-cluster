@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph-test version="1.0"
+	xmlns="http://www.culturegraph.org/metamorph-test" xmlns:mm="http://www.culturegraph.org/metamorph"
+	xmlns:cgxml="http://www.culturegraph.org/cgxml">
+
+	<test-case name="xw combine">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="cg:bundledIn" value="A" />
+						<cgxml:literal name="cg:rvk" value="r" />
+					</cgxml:record>
+					<cgxml:record id="2">
+						<cgxml:literal name="cg:rvk" value="r" />
+					</cgxml:record>
+					<cgxml:record id="3">
+						<cgxml:literal name="cg:rvk" value="r" />
+						<cgxml:literal name="cg:ddc" value="d" />
+					</cgxml:record>
+					<cgxml:record id="4">
+						<cgxml:literal name="cg:bundledIn" value="A" />
+						<cgxml:literal name="cg:rvk" value="r" />
+						<cgxml:literal name="cg:ddc" value="d1" />
+						<cgxml:literal name="cg:ddc" value="d2" />
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+
+		<transformation type="text/x-metamorph+xml" src="morph/xw/combine.xml" />
+
+		<result type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="_id" value="A" />
+						<cgxml:literal name="cg:rvk" value="1:r" />
+					</cgxml:record>
+					<cgxml:record id="2" />
+					<cgxml:record id="3">
+						<cgxml:literal name="cg:rvk" value="3:r" />
+						<cgxml:literal name="cg:ddc" value="3:d" />
+					</cgxml:record>
+					<cgxml:record id="4">
+						<cgxml:literal name="_id" value="A" />
+						<cgxml:literal name="cg:rvk" value="4:r" />
+						<cgxml:literal name="cg:ddc" value="4:d1" />
+						<cgxml:literal name="cg:ddc" value="4:d2" />
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+
+	<test-case name="ddc Records">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="cg:ddc" value="ID1:100" />
+						<cgxml:literal name="cg:ddc" value="ID2:300" />
+						<cgxml:literal name="cg:rvk" value="ID3:AA200" />
+						<cgxml:literal name="cg:rvk" value="ID3:BB200" />
+					</cgxml:record>
+					<cgxml:record id="2">
+						<cgxml:literal name="cg:rvk" value="ID3:AA200" />
+						<cgxml:literal name="cg:rvk" value="ID3:BB200" />
+					</cgxml:record>
+					<cgxml:record id="3">
+						<cgxml:literal name="cg:ddc" value="ID1:100" />
+						<cgxml:literal name="cg:ddc" value="ID2:300" />
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+
+		<transformation type="text/x-metamorph+xml" src="morph/xw/ddcRecords.xml" />
+
+		<result type="text/x-cg+xml" strict-key-order="false"
+			strict-value-order="false">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="{to:ID1}cg:ddc" value="100" />
+						<cgxml:literal name="{to:ID1}cg:rvk" value="AA200" />
+						<cgxml:literal name="{to:ID1}cg:rvk" value="BB200" />
+
+						<cgxml:literal name="{to:ID2}cg:ddc" value="300" />
+						<cgxml:literal name="{to:ID2}cg:rvk" value="AA200" />
+						<cgxml:literal name="{to:ID2}cg:rvk" value="BB200" />
+					</cgxml:record>
+					<cgxml:record id="2" />
+					<cgxml:record id="3" />
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+
+</metamorph-test>

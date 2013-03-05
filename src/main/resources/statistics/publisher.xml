@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>publisher</name>
+	</meta>
+	<rules>
+		<data name="" source="cg:publisherName">
+			<case to="lower"/>
+			<replace pattern="[,-]" with=""/>
+			<replace pattern="(universität)|(university)" with="univ."/>
+			<replace pattern="verlag" with="verl."/>
+			<replace pattern="(deutsch)|(deutsche)" with="dt."/>
+			<replace pattern="press" with="pr."/>
+			<replace pattern="wissenschaft" with="wiss."/>
+			<replace pattern="gesellschaft" with="ges."/>
+		</data>
+	</rules>
+</metamorph>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Wrong RVK</name>
+	</meta>
+	<rules>
+
+		<choose name="wrongRVK">
+			<data source="cg:rvk">
+				<case to="upper" />
+				<replace pattern="\W" with="" />
+				<regexp match="[A-Z][A-Z]\d\d\d\d?\d?" />
+				<constant value="OK"/>
+			</data>
+			<data source="cg:rvk" />
+			<postprocess>
+				<not-equals string="OK"/>
+			</postprocess>
+		</choose>
+
+	</rules>
+</metamorph>

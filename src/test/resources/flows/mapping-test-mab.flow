@@ -1,0 +1,6 @@
+"src/test/resources/mab2/BSZ_overlap_DNB.mab2"|
+open("file")|
+read("mab2")|
+//morph("mapping/ingest.mab2.xml")|
+encode("pretty-print")|
+write("stdout");

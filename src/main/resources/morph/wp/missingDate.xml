@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name></name>
+	</meta>
+	<rules>
+		<combine name="gestorben" value="${wiki}">
+			<choose>
+				<data name="death" source="rdaGr2:dateOfDeath" />
+				<data source="_id">
+					<constant value="missing" />
+				</data>
+				<postprocess>
+					<equals string="missing" />
+				</postprocess>
+			</choose>
+			<data name="wiki" source="dewp_cat">
+				<regexp match="^[gG]estorben\W*(\d+)" format="${1}" />
+			</data>
+			<data source="cg:type">
+				<lookup>
+					<entry name="pnd" value="exists" />
+				</lookup>
+			</data>
+		</combine>
+
+		<combine name="geboren" value="${wiki}">
+			<choose>
+				<data name="birth" source="rdaGr2:dateOfBirth" />
+				<data source="_id">
+					<constant value="missing" />
+				</data>
+				<postprocess>
+					<equals string="missing" />
+				</postprocess>
+			</choose>
+			<data name="wiki" source="dewp_cat">
+				<regexp match="^[gG]eboren\W*(\d+)" format="${1}" />
+			</data>
+			<data source="cg:type">
+				<lookup>
+					<entry name="pnd" value="exists" />
+				</lookup>
+			</data>
+		</combine>
+
+	</rules>
+
+</metamorph>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="."
+	version="1">
+	<meta>
+		<name>Statistik ueber identifier in CG</name>
+	</meta>
+
+	<rules>
+		<data name="@prefix" source="_id">
+			<substring end="3" />
+		</data>
+
+		<group name="@property">
+			<data source="_else">
+				<switch-name-value/>
+				<unique/>
+			</data>
+		</group>
+
+		<data name="ALL" source="_id">
+			<constant value="" />
+		</data>
+
+		<data name="ALL-" source="@property" />
+
+		<data name="" source="@prefix" />
+
+		<combine name="${prefix}-" value="${property}">
+			<data source="@prefix" name="prefix" />
+			<data source="@property" name="property" />
+		</combine>
+	</rules>
+</metamorph>

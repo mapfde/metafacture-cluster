@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+	<meta>
+		<name>wrk</name>
+	</meta>
+	<rules>
+
+		<combine name="@OK" value="">
+			<data source="cg:material">
+				<not-equals string="continuing resource" />
+			</data>
+			<data source="cg:level">
+				<not-equals string="part-dep" />
+			</data>
+		</combine>
+
+		<data source="dcterms:issued" name="@year">
+			<regexp match="\d\d\d\d" />
+		</data>
+
+		<choose name="@volume">
+			<data source="dcterms:volume">
+				<regexp match="\d+" />
+			</data>
+			<data source="_id">
+				<constant value="X" />
+			</data>
+		</choose>
+
+		<combine name="key" value="${eki}-E-${volume}" reset="false">
+			<data source="@volume" name="volume" />
+			<data name="eki" source="cg:eki">
+				<trim />
+				<regexp match=".{6}.*" />
+				<buffer />
+			</data>
+			<data source="@OK" />
+		</combine>
+
+
+
+		<combine name="key" value="${isbn}-I-${volume}" reset="false">
+			<data source="@volume" name="volume" />
+			<data name="isbn" source="bibo:isbn13">
+				<buffer />
+			</data>
+			<data source="@OK" />
+		</combine>
+
+		<combine name="key" value="${title}-${vol}-${creator}" reset="false">
+			<data source="@OK" />
+			<combine name="title" value="${title} ${add} ${part}"
+				flushWith="record">
+				<data source="dcterms:title" name="title" />
+				<data source="cg:addTitle" name="add" />
+				<data source="cg:partTitle" name="part" />
+
+				<postprocess>
+					<normalize-utf8 />
+					<replace pattern="\W" with="" />
+					<case to="lower" />
+					<setreplace map="diacrit" />
+					<substring end="50" />
+				</postprocess>
+			</combine>
+
+
+			<data source="@volume" name="vol" />
+
+			<combine name="creator" value="${creator}" sameEntity="true">
+				<data source="cg:creator.name" name="creator">
+					<regexp match="^([\p{L}\p{M}\-]*), ([\p{L}\p{M}]*)( .*)?$"
+						format="${1}${2}" />
+				</data>
+				<data source="cg:creator.rel">
+					<equals string="aut" />
+				</data>
+				<postprocess>
+					<buffer />
+				</postprocess>
+			</combine>
+
+
+		</combine>
+	</rules>
+	<maps>
+		<map name="diacrit">
+			<entry name="ä" value="ae" />
+			<entry name="ü" value="ue" />
+			<entry name="ö" value="oe" />
+			<entry name="ß" value="ss" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="ë" value="e" />
+			<entry name="ï" value="i" />
+			<entry name="à" value="a" />
+			<entry name="è" value="e" />
+			<entry name="â" value="a" />
+			<entry name="ê" value="e" />
+			<entry name="å" value="a" />
+			<entry name="æ" value="ae" />
+			<entry name="ç" value="c" />
+			<entry name="œ" value="oe" />
+			<entry name="ñ" value="n" />
+			<entry name="š" value="s"/>
+			<entry name="&amp;" value="und" />
+			<entry name="" value="" />
+			<entry name="" value="" />
+		</map>
+	</maps>
+
+</metamorph>

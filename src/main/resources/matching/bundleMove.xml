@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="."
+	version="1">
+	<meta>
+		<name></name>
+	</meta>
+
+	<rules>
+
+		<combine name="{to:${redirect}}cg:contains" value="${contains}"
+			reset="false">
+			<data source="cg:redirect" name="redirect" />
+			<data source="@contains" name="contains" />
+		</combine>
+
+		<combine name="cg:contains" value="${contains}" reset="false">
+			<choose>
+				<data source="cg:redirect" name="redirect" />
+				<data source="_id">
+					<constant value="main" />
+				</data>
+				<postprocess>
+					<equals string="main" />
+				</postprocess>
+			</choose>
+			<data source="@contains" name="contains" />
+		</combine>
+
+		<data source="cg:redirect" />
+
+		<!-- <data source="cg:contains" /> -->
+
+		<!-- <combine name="{to:${redirect}}cg:type" value="${contains}" > -->
+		<!-- <data source="cg:redirect" name="redirect"/> -->
+		<!-- <data source="_id" name="type"> -->
+		<!-- <constant value="bundle"/> -->
+		<!-- </data> -->
+		<!-- </combine> -->
+
+		<data source="cg:contains" name="@contains">
+			<buffer />
+		</data>
+
+		<data source="_id" name="cg:type">
+			<constant value="bundle" />
+		</data>
+
+	</rules>
+</metamorph>

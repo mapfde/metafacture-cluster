@@ -1,0 +1,9 @@
+"src/test/resources/idns.txt"|
+open("file")|
+as-lines|
+template("https://portal.dnb.de/opac.htm?method=requestMarcXml&idn=${obj}")|
+open("http")|
+read("marcxml")|
+morph("mapping/ingest.marc21.xml")|
+encode("pretty-print")|
+write("stdout");

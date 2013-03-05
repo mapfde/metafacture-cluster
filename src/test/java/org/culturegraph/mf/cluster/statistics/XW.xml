@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph-test version="1.0"
+	xmlns="http://www.culturegraph.org/metamorph-test" xmlns:mm="http://www.culturegraph.org/metamorph"
+	xmlns:cgxml="http://www.culturegraph.org/cgxml">
+
+	<test-case name="ddc-rvk">
+		<input type="text/x-cg+xml">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+						<cgxml:literal name="cg:ddc" value="10" />
+						<cgxml:literal name="cg:ddc" value="12" />
+						<cgxml:literal name="cg:rvk" value="AA234" />
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</input>
+
+		<transformation type="text/x-metamorph+xml" src="statistics/xw/ddc-rvk.xml" />
+
+		<result type="text/x-cg+xml" strict-value-order="false"
+			strict-key-order="false">
+			<cgxml:cgxml version="1.0">
+				<cgxml:records>
+					<cgxml:record id="1">
+<!-- 						<cgxml:literal name="" value="r" /> -->
+<!-- 						<cgxml:literal name="" value="d" /> -->
+<!-- 						<cgxml:literal name="" value="d" /> -->
+
+						<cgxml:literal name="" value="tAA" />
+						<cgxml:literal name="" value="tAA2" />
+						<cgxml:literal name="" value="tAA23" />
+						<cgxml:literal name="" value="tAA234" />
+
+						<cgxml:literal name="" value="s1" />
+						<cgxml:literal name="" value="s10" />
+
+						<cgxml:literal name="" value="s1$tAA" />
+						<cgxml:literal name="" value="s10$tAA" />
+						<cgxml:literal name="" value="s1$tAA2" />
+						<cgxml:literal name="" value="s10$tAA2" />
+						<cgxml:literal name="" value="s1$tAA23" />
+						<cgxml:literal name="" value="s10$tAA23" />
+						<cgxml:literal name="" value="s1$tAA234" />
+						<cgxml:literal name="" value="s10$tAA234" />
+						
+						<cgxml:literal name="" value="s12" />
+						
+						<cgxml:literal name="" value="s12$tAA" />
+						<cgxml:literal name="" value="s12$tAA2" />
+						<cgxml:literal name="" value="s12$tAA23" />
+						<cgxml:literal name="" value="s12$tAA234" />
+				
+						<cgxml:literal name="" value="#"/>
+
+					</cgxml:record>
+				</cgxml:records>
+			</cgxml:cgxml>
+		</result>
+	</test-case>
+
+</metamorph-test>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="$"
+	version="1">
+
+	<meta>
+		<name>Record Typen</name>
+	</meta>
+
+	<rules>
+		<data source="002@$0" name="">
+			<constant value="  #records" />
+		</data>
+
+		<data source="002@$0" name="">
+			<substring end="1" />
+		</data>
+
+		<data source="002@$0" name="">
+			<substring end="2" />
+		</data>
+
+		<data source="002@$0" name="">
+			<substring end="3" />
+		</data>
+	</rules>
+
+</metamorph>

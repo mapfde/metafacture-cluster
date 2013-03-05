@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<rules>
+		<combine name="" value="${t}${d}">
+			<data source="cg:contains">
+				<occurrence only="2" />
+			</data>
+			<data source="cg:contains">
+				<substring end="3"/>
+				<equals string="DNB"/>
+			</data>
+			<data source="_id" name="t">
+				<compose prefix="&lt;b&gt;" postfix="&lt;/b&gt;:" />
+			</data>
+			<concat delimiter=", " name="d" postfix="&lt;br&gt;">
+				<data source="cg:contains" name="">
+					<htmlanchor prefix="http://hub.culturegraph.org/about/" />
+				</data>
+			</concat>
+		</combine>
+	</rules>
+
+</metamorph>

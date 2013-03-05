@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>sg3</name>
+	</meta>
+	<rules>
+
+		<combine name="key"
+			value="${title}-${creator}-${issued}-${edition}-${volume}-${material}-${publisher}"
+			reset="false">
+
+			<data name="issued" source="dcterms:issued">
+				<regexp match="\d\d\d\d" />
+			</data>
+
+			<data name="publisher" source="cg:pubName">
+				<occurrence only="1" />
+				<normalize-utf8 />
+				<case to="lower" />
+				<replace pattern="[, -]" with="" />
+				<setreplace map="diacrit" />
+				<setreplace map="apprev" />
+				<substring end="8" />
+			</data>
+
+			<choose name="edition">
+				<data source="cg:edition">
+					<regexp match="\d+" />
+				</data>
+				<data source="cg:edition">
+					<replace pattern="[, \-\.;\)\(\]\[ @!?/\\'&quot;]" with="" />
+					<case to="lower" />
+					<trim />
+					<substring end="8" />
+				</data>
+				<data source="_id">
+					<constant value="X" />
+				</data>
+			</choose>
+
+			<choose name="volume">
+				<data source="cg:volume">
+					<occurrence only="1" />
+					<regexp match="\d+" />
+				</data>
+				<data source="dcterms:volume">
+					<occurrence only="1" />
+					<replace pattern="[, \-\.;\)\(\]\[ @!?/\\'&quot;]" with="" />
+					<case to="lower" />
+					<trim />
+					<substring end="8" />
+				</data>
+				<data source="_id">
+					<constant value="X" />
+				</data>
+			</choose>
+
+			<data name="material" source="cg:material" />
+
+			<combine name="title" value="${t}${a}" flushWith="record">
+				<data name="t" source="@title" />
+				<data name="a" source="@addtitle" />
+				<postprocess>
+					<substring end="50" />
+				</postprocess>
+			</combine>
+
+
+			<combine name="creator" value="${value}" sameEntity="true">
+				<data name="value" source="cg:creator.name">
+					<normalize-utf8 />
+					<regexp match="^([\p{L}\p{M}\-]*), ([\p{L}\p{M}]*)( .*)?$"
+						format="${1}${2}" />
+				</data>
+				<data source="cg:creator.rel" name="rel">
+					<whitelist>
+						<entry name="edt" />
+						<entry name="aut" />
+						<entry name="cre" />
+						<entry name="cnt" />
+					</whitelist>
+				</data>
+				<postprocess>
+					<buffer />
+				</postprocess>
+			</combine>
+
+		</combine>
+
+		<data name="@title" source="dcterms:title">
+			<replace pattern="[, \-\.;\)\(\]\[ @!?/\\]" with="" />
+			<normalize-utf8 />
+			<case to="lower" />
+			<setreplace map="diacrit" />
+		</data>
+
+		<data name="@addtitle" source="cg:addTitle">
+			<replace pattern="[, \-\.;\)\(\]\[ @!?/\\]" with="" />
+			<normalize-utf8 />
+			<case to="lower" />
+			<setreplace map="diacrit" />
+		</data>
+
+
+
+
+
+
+	</rules>
+
+	<maps>
+		<map name="diacrit">
+			<entry name="ä" value="ae" />
+			<entry name="ü" value="ue" />
+			<entry name="ö" value="oe" />
+			<entry name="ß" value="ss" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="é" value="e" />
+			<entry name="á" value="a" />
+			<entry name="é" value="e" />
+			<entry name="ë" value="e" />
+			<entry name="ï" value="i" />
+			<entry name="á" value="a" />
+			<entry name="à" value="a" />
+			<entry name="è" value="e" />
+			<entry name="â" value="a" />
+			<entry name="ê" value="e" />
+			<entry name="å" value="a" />
+			<entry name="æ" value="ae" />
+			<entry name="ç" value="c" />
+			<entry name="œ" value="oe" />
+			<entry name="ñ" value="n" />
+			<entry name="&amp;" value="und" />
+			<entry name="" value="" />
+			<entry name="" value="" />
+		</map>
+
+		<map name="apprev">
+			<entry name="universitaet" value="univ." />
+			<entry name="university" value="univ." />
+			<entry name="verlag" value="verl." />
+			<entry name="verlags" value="verl." />
+			<entry name="deutsch" value="dt." />
+			<entry name="deutsche" value="dt." />
+			<entry name="press" value="pr." />
+			<entry name="wissenschaft" value="wiss." />
+			<entry name="gesellschaft" value="ges." />
+			<entry name="europaeische" value="europ." />
+		</map>
+	</maps>
+
+</metamorph>

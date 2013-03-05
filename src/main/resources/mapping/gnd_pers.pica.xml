@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	version="1" entityMarker=".">
+	<meta>
+		<name>Umsetzung der GND Personen</name>
+	</meta>
+	<rules>
+		<data source="_id" name="cg:type">
+			<constant value="person" />
+		</data>
+
+		<!-- 043 -->
+		<data source="042B.a" name="cg:geo">
+			<case to="upper" />
+			<lookup in="countries" />
+		</data>
+
+
+		<!-- 260 -->
+		<!-- <data source="041O.0" name="gnd:complexSeeReferenceSubject"/> -->
+		<data source="041O.a" name="cg:seeSubject" />
+
+
+		<!-- 375 -->
+		<data source="032T.a" name="gnd:gender">
+			<case to="lower" />
+			<lookup>
+				<entry name="m" value="Mann" />
+				<entry name="w" value="Frau" />
+			</lookup>
+		</data>
+
+
+
+		<!-- 377 -->
+		<data source="042C.a" name="gnd:languageCode">
+			<case to="lower" />
+		</data>
+
+		<!-- 678 -->
+		<data source="050G.b" name="cg:bio" />
+
+		<!-- 550 istr -->
+		<combine name="cg:${name}" value="${value}" reset="true">
+			<data source="041R.4" name="name">
+				<lookup>
+					<entry name="istr" value="played" />
+				</lookup>
+			</data>
+
+			<data source="041R.a" name="value" />
+
+
+		</combine>
+
+		<!-- 679 -->
+		<data source="050H.a" name="gnd:definition" />
+
+
+		<!-- 100 -->
+		<combine name="cg:prefName"
+			value="${personalname}${surname}${forename}${prefix}${addition}"
+			flushWith="028A" reset="true">
+			<data source="028A.P" name="personalname" />
+			<data source="028A.a" name="surname" />
+			<data source="028A.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028A.c" name="prefix">
+				<compose prefix=" " />
+			</data>
+			<concat name="addition" prefix=" &lt;" postfix="&gt;"
+				delimiter=", " flushWith="028A" reset="true">
+				<data source="028A.n" />
+				<data source="028A.l" />
+				<data source="028A.g" />
+			</concat>
+		</combine>
+
+		<!-- 400 -->
+		<combine name="cg:varName"
+			value="${personalname}${surname}${forename}${prefix}${addition}"
+			flushWith="028@" reset="true">
+			<data source="028@.P" name="personalname" />
+			<data source="028@.a" name="surname" />
+			<data source="028@.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028@.c" name="prefix">
+				<compose prefix=" " />
+			</data>
+			<concat name="addition" prefix=" &lt;" postfix="&gt;"
+				delimiter=", " flushWith="028@" reset="true">
+				<data source="028@.n" />
+				<data source="028@.l" />
+				<data source="028@.g" />
+			</concat>
+		</combine>
+
+		<!-- Rels -->
+		<entity name="cg:rel" reset="true" flushWith="028R">
+			<data source="028R.4" name="type">
+				<case to="lower" />
+				<lookup in="rel_code_p_500" />
+			</data>
+			<combine name="value"
+				value="${personalname}${surname}${forename}${prefix}${addition}"
+				flushWith="028R" reset="true">
+				<data source="028R.P" name="personalname" />
+				<data source="028R.a" name="surname" />
+				<data source="028R.d" name="forename">
+					<compose prefix=", " />
+				</data>
+				<data source="028R.c" name="prefix">
+					<compose prefix=" " />
+				</data>
+				<concat name="addition" prefix=" &lt;" postfix="&gt;"
+					delimiter=", " flushWith="028R" reset="true">
+					<data source="028R.n" />
+					<data source="028R.l" />
+					<data source="028R.g" />
+				</concat>
+			</combine>
+			<data source="028R.v" name="adj" />
+			<data source="028R.9" name="ref" />
+		</entity>
+
+
+		<entity name="cg:rel" sameEntity="true" reset="true" flushWith="029R">
+			<data source="029R.4" name="type">
+				<case to="lower" />
+				<lookup in="rel_code_p_510" />
+			</data>
+			<data source="029R.a" name="value" />
+			<data source="029R.9" name="ref" />
+		</entity>
+
+		<entity name="cg:rel" sameEntity="true" reset="true" flushWith="030R">
+
+			<data source="030R.4" name="type">
+				<case to="lower" />
+				<lookup in="rel_code_p_511" />
+			</data>
+			<data source="030R.a" name="value" />
+			<data source="030R.9" name="ref" />
+
+		</entity>
+
+		<entity name="cg:rel" sameEntity="true" reset="true" flushWith="022R">
+			<data source="022R.4" name="type">
+				<case to="lower" />
+				<lookup in="rel_code_p_530" />
+			</data>
+			<data source="022R.a" name="value" />
+			<data source="022R.9" name="ref" />
+
+		</entity>
+
+		<entity name="cg:rel" sameEntity="true" reset="true" flushWith="041R">
+
+			<data source="041R.4" name="type">
+				<case to="lower" />
+				<lookup in="rel_code_p_550" />
+			</data>
+			<data source="041R.a" name="value" />
+			<data source="041R.9" name="ref" />
+
+		</entity>
+
+		<entity name="cg:rel" sameEntity="true" reset="true" flushWith="065R">
+			<data source="065R.4" name="type">
+				<case to="lower" />
+				<lookup in="rel_code_p_551" />
+			</data>
+			<data source="065R.a" name="value" />
+			<data source="065R.9" name="ref" />
+		</entity>
+
+		<!-- 548 datl datx -->
+		<combine name="${name}" value="${a}" reset="true">
+			<data source="060R.4" name="name">
+				<lookup>
+					<entry name="datl" value="cg:birth" />
+					<!-- <entry name="datx" value="gnd:dateOfBirth" /> -->
+				</lookup>
+			</data>
+			<data source="060R.a" name="a" />
+		</combine>
+		<combine name="${name}" value="${b}" reset="true">
+			<data source="060R.4" name="name">
+				<lookup>
+					<entry name="datl" value="cg:death" />
+					<!-- <entry name="datx" value="gnd:dateOfDeath" /> -->
+				</lookup>
+			</data>
+			<data source="060R.b" name="b" />
+		</combine>
+		<combine name="${name}" value="${c}" reset="true">
+			<data source="060R.4" name="name">
+				<lookup>
+					<entry name="datl" value="gnd:birthAndDeath" />
+					<!-- <entry name="datx" value="gnd:dateOfBirthAndDeath" /> -->
+				</lookup>
+			</data>
+			<data source="060R.c" name="c" />
+		</combine>
+		<combine name="${name}" value="${d}" reset="true">
+			<data source="060R.4" name="name">
+				<lookup>
+					<entry name="datl" value="gnd:birthAndDeath" />
+					<!-- <entry name="datx" value="gnd:dateOfBirthAndDeath" /> -->
+				</lookup>
+			</data>
+			<data source="060R.d" name="d">
+				<compose prefix="ca. " />
+			</data>
+		</combine>
+
+		<!-- 670 -->
+		<combine name="${name}" value="${value}" reset="true"
+			sameEntity="true">
+			<data source="050E.a" name="name">
+				<case to="lower" />
+				<lookup>
+					<entry name="homepage" value="gnd:homepage" />
+				</lookup>
+			</data>
+			<data source="050E.u" name="value" />
+		</combine>
+	</rules>
+
+	<maps>
+		<mapfile name="instruments_voices" files="mapping/instruments.txt"/>
+			
+
+		<map name="rel_code_b_500">
+			<entry name="stif" value="benefactor" />
+			<entry name="feie" value="celebrated" />
+			<entry name="saml" value="collector" />
+			<entry name="bete" value="contributing" />
+			<entry name="korr" value="correspondent" />
+			<entry name="grue" value="founder" />
+			<entry name="musi" value="musician" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="them" value="topic" />
+		</map>
+
+		<map name="rel_code_b_510">
+			<entry name="stif" value="benefactor" />
+			<entry name="feie" value="celebratedCorp" />
+			<entry name="saml" value="collector" />
+			<entry name="bete" value="contributingCorp" />
+			<entry name="mitg" value="corporateBodyIsMember" />
+			<entry name="korr" value="correspondent" />
+			<entry name="grue" value="founder" />
+			<entry name="adue" value="superiorCorp" />
+			<entry name="vorg" value="precedingCorp" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="nach" value="succeedingCorp" />
+			<entry name="nazw" value="tempName" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_b_511">
+			<entry name="adue" value="superiorCorp" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_b_530">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rela" value="relatedWork" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_b_550">
+			<entry name="obin" value="broaderTermInstantial" />
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="obmo" value="broaderTermWithMoreThanOneElement" />
+			<entry name="obal" value="broderTerm" />
+			<entry name="feie" value="celebratedTopic" />
+			<entry name="akti" value="fieldOfActivity" />
+			<entry name="funk" value="functionOrRole" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_b_551">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="bete" value="contributingPlace" />
+			<entry name="mitg" value="memberOf" />
+			<entry name="adue" value="superiorCorp" />
+			<entry name="ortm" value="otherPlace" />
+			<entry name="orta" value="placeOfBusiness" />
+			<entry name="rela" value="relatedPlace" />
+			<entry name="geoa" value="relatedPlace" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="nach" value="succeedingPlace" />
+			<entry name="geow" value="spatialAreaOfActivity" />
+			<entry name="nazw" value="tempName" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_f_500">
+			<entry name="stif" value="benefactor" />
+			<entry name="feie" value="celebrated" />
+			<entry name="bete" value="contributing" />
+			<entry name="kura" value="curator" />
+			<entry name="aust" value="exhibitor" />
+			<entry name="musi" value="musician" />
+			<entry name="vera" value="organizerOrHost" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_f_510">
+			<entry name="stif" value="benefactor" />
+			<entry name="feie" value="celebrated" />
+			<entry name="bete" value="contributing" />
+			<entry name="kura" value="curator" />
+			<entry name="aust" value="exhibitor" />
+			<entry name="adue" value="superiorEvent" />
+			<entry name="vera" value="organizer" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_f_511">
+			<entry name="adue" value="superiorEvent" />
+			<entry name="vorg" value="precedingEvent" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="nach" value="succeedingEvent" />
+			<entry name="nazw" value="tempName" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_f_530">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="anla" value="occasion" />
+			<entry name="vbal" value="related" />
+			<entry name="rela" value="related" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_f_550">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="obmo" value="broaderTermWithMoreThanOneElement" />
+			<entry name="obal" value="broderTerm" />
+			<entry name="feie" value="celebrated" />
+			<entry name="akti" value="fieldOfActivity" />
+			<entry name="anla" value="occasion" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_f_551">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="ortm" value="otherPlace" />
+			<entry name="ortv" value="placeOfEvent" />
+			<entry name="vorg" value="precedingPlace" />
+			<entry name="rela" value="related" />
+			<entry name="geoa" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="geow" value="spatialAreaOfActivity" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_g_500">
+			<entry name="kueg" value="accreditedArtist" />
+			<entry name="arch" value="architect" />
+			<entry name="kuen" value="artist" />
+			<entry name="stif" value="benefactor" />
+			<entry name="bauh" value="buildingOwner" />
+			<entry name="feie" value="celebratedPerson" />
+			<entry name="kuez" value="citedArtist" />
+			<entry name="widm" value="dedicatee" />
+			<entry name="kuew" value="doubtfulArtist" />
+			<entry name="kue1" value="firstArtist" />
+			<entry name="befr" value="formerOwner" />
+			<entry name="grue" value="founder" />
+			<entry name="verr" value="initiator" />
+			<entry name="besi" value="owner" />
+			<entry name="rela" value="relatedPerson" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rest" value="restorer" />
+			<entry name="bilh" value="sculptor" />
+			<entry name="spon" value="sponsor" />
+		</map>
+		<map name="rel_code_g_510">
+			<entry name="kueg" value="accreditedArtist" />
+			<entry name="arch" value="architect" />
+			<entry name="kuen" value="artist" />
+			<entry name="stif" value="benefactor" />
+			<entry name="kuez" value="citedArtist" />
+			<entry name="widm" value="dedicatee" />
+			<entry name="kuew" value="doubtfulArtist" />
+			<entry name="kue1" value="firstArtist" />
+			<entry name="befr" value="formerOwner" />
+			<entry name="grue" value="founder" />
+			<entry name="verr" value="initiator" />
+			<entry name="besi" value="owner" />
+			<entry name="mitg" value="placeIsMember" />
+			<entry name="vorg" value="precedingCorp" />
+			<entry name="rela" value="relatedCorp" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rest" value="restorer" />
+			<entry name="bilh" value="sculptor" />
+			<entry name="spon" value="sponsor" />
+			<entry name="nach" value="succeedingCorp" />
+			<entry name="nazw" value="tempName" />
+		</map>
+		<map name="rel_code_g_511">
+			<entry name="rela" value="relatedConferenceOrEvent" />
+			<entry name="vbal" value="relatedTerm" />
+		</map>
+		<map name="rel_code_g_530">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rela" value="relatedWork" />
+		</map>
+		<map name="rel_code_g_550">
+			<entry name="obin" value="broaderTermInstantial" />
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="obmo" value="broaderTermWithMoreThanOneElement" />
+			<entry name="obal" value="broderTermGeneral" />
+			<entry name="rela" value="relatedSubjecHeadingt" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="spon" value="sponsorOrPatron" />
+		</map>
+		<map name="rel_code_g_551">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="adue" value="superiorPlace" />
+			<entry name="orta" value="place" />
+			<entry name="vorg" value="precedingPlace" />
+			<entry name="rela" value="related" />
+			<entry name="geoa" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="nach" value="succeedingPlace" />
+			<entry name="punk" value="StartingOrFinalPointOfADistance" />
+			<entry name="nazw" value="tempName" />
+		</map>
+		<map name="rel_code_p_500">
+			<entry name="beza" value="acquaintanceship" />
+			<entry name="korr" value="correspondent" />
+			<entry name="bezf" value="familialRelationship" />
+			<entry name="mitg" value="familyMember" />
+			<entry name="bezb" value="profRelationship" />
+			<entry name="pseu" value="pseudonym" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_p_510">
+			<entry name="affi" value="affiliation" />
+			<entry name="korr" value="correspondent" />
+			<entry name="rela" value="relatedCorp" />
+			<entry name="vbal" value="relatedTerm" />
+		</map>
+		<map name="rel_code_p_511">
+			<entry name="affi" value="affiliation" />
+			<entry name="rela" value="relatedEvent" />
+			<entry name="vbal" value="relatedTerm" />
+		</map>
+		<map name="rel_code_p_530">
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rela" value="relatedWork" />
+		</map>
+		<map name="rel_code_p_550">
+			<entry name="akad" value="academicDegree" />
+			<entry name="obin" value="broaderTermInstantial" />
+			<entry name="obal" value="broderTerm" />
+			<entry name="akti" value="fieldOfActivity" />
+			<entry name="stud" value="fieldOfStudy" />
+			<entry name="funk" value="functionOrRole" />
+			<entry name="berc" value="occupation" />
+			<entry name="beru" value="occupation" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="adel" value="titleOfNobility" />
+		</map>
+		<map name="rel_code_p_551">
+			<entry name="affi" value="affiliation" />
+			<entry name="ortc" value="characteristicPlace" />
+			<entry name="ortw" value="placeOfActivity" />
+			<entry name="ortg" value="placeOfBirth" />
+			<entry name="orts" value="placeOfDeath" />
+			<entry name="ortx" value="placeOfExile" />
+			<entry name="rela" value="relatedPlace" />
+			<entry name="geoa" value="relatedPlace" />
+			<entry name="vbal" value="relatedTerm" />
+		</map>
+		<map name="rel_code_pif_500">
+			<entry name="beza" value="acquaintanceship" />
+			<entry name="korr" value="correspondent" />
+			<entry name="bezf" value="familialRelationship" />
+			<entry name="bezb" value="profRelationship" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_pif_510">
+			<entry name="affi" value="affiliation" />
+			<entry name="korr" value="correspondent" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_pif_511">
+			<entry name="affi" value="affiliation" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_pif_530">
+			<entry name="vbal" value="related" />
+			<entry name="rela" value="related" />
+		</map>
+		<map name="rel_code_pif_550">
+			<entry name="akti" value="fieldOfActivity" />
+			<entry name="berc" value="occupation" />
+			<entry name="beru" value="occupation" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_pif_551">
+			<entry name="affi" value="affiliation" />
+			<entry name="ortw" value="placeOfActivity" />
+			<entry name="ortx" value="placeOfExile" />
+			<entry name="rela" value="related" />
+			<entry name="geoa" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_s_500">
+			<entry name="feie" value="celebrated" />
+			<entry name="bete" value="contributing" />
+			<entry name="urhe" value="creator" />
+			<entry name="erfi" value="inventor" />
+			<entry name="hers" value="manufacturer" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="uebe" value="translator" />
+		</map>
+		<map name="rel_code_s_510">
+			<entry name="feie" value="celebrated" />
+			<entry name="urhe" value="creator" />
+			<entry name="erfi" value="inventor" />
+			<entry name="hers" value="manufacturer" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="uebe" value="translator" />
+		</map>
+		<map name="rel_code_s_511">
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_s_530">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="vbal" value="related" />
+			<entry name="rela" value="related" />
+		</map>
+		<map name="rel_code_s_550">
+			<entry name="obge" value="broaderTerm" />
+			<entry name="obin" value="broaderTermInstantial" />
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="obmo" value="broaderTermWithMoreThanOneElement" />
+			<entry name="obal" value="broderTerm" />
+			<entry name="feie" value="celebrated" />
+			<entry name="funk" value="role" />
+			<entry name="anla" value="occasion" />
+			<entry name="vorg" value="precedingSubject" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="nach" value="succeeding" />
+		</map>
+		<map name="rel_code_s_551">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="bete" value="contributing" />
+			<entry name="orta" value="place" />
+			<entry name="ortw" value="placeOfActivity" />
+			<entry name="orth" value="placeOfManufacture" />
+			<entry name="rela" value="related" />
+			<entry name="geoa" value="related" />
+			<entry name="vbal" value="related" />
+		</map>
+		<map name="rel_code_u_500">
+			<entry name="kueg" value="accreditedArtist" />
+			<entry name="autg" value="accreditedAuthor" />
+			<entry name="komg" value="accreditedComposer" />
+			<entry name="adre" value="addressee" />
+			<entry name="anno" value="annotator" />
+			<entry name="arra" value="arranger" />
+			<entry name="kuen" value="artist" />
+			<entry name="auta" value="author" />
+			<entry name="stif" value="benefactor" />
+			<entry name="bubi" value="bookbinder" />
+			<entry name="gest" value="bookdesigner" />
+			<entry name="kart" value="cartographer" />
+			<entry name="feie" value="celebratedPerson" />
+			<entry name="chre" value="choreographer" />
+			<entry name="kuez" value="citedArtist" />
+			<entry name="autz" value="citedAuthor" />
+			<entry name="komz" value="citedComposer" />
+			<entry name="saml" value="collector" />
+			<entry name="comp" value="compiler" />
+			<entry name="koma" value="composer" />
+			<entry name="leih" value="conferrer" />
+			<entry name="bete" value="contributingPerson" />
+			<entry name="kopi" value="copist" />
+			<entry name="urhe" value="creator" />
+			<entry name="kura" value="curator" />
+			<entry name="widm" value="dedicatee" />
+			<entry name="desi" value="designer" />
+			<entry name="regi" value="director" />
+			<entry name="kame" value="directorOfPhotography" />
+			<entry name="kuew" value="doubtfulArtist" />
+			<entry name="autw" value="doubtfulAuthor" />
+			<entry name="komw" value="doubtfulComposer" />
+			<entry name="hrsg" value="editor" />
+			<entry name="grav" value="engraver" />
+			<entry name="radi" value="etcher" />
+			<entry name="autf" value="fictitiousAuthor" />
+			<entry name="kue1" value="firstArtist" />
+			<entry name="aut1" value="firstAuthor" />
+			<entry name="kom1" value="firstComposer" />
+			<entry name="befr" value="formerOwner" />
+			<entry name="illu" value="illustratorOrIlluminator" />
+			<entry name="verr" value="initiator" />
+			<entry name="istm" value="instrumentalist" />
+			<entry name="libr" value="librettist" />
+			<entry name="lith" value="lithographer" />
+			<entry name="hers" value="manufacturer" />
+			<entry name="spre" value="narrator" />
+			<entry name="besi" value="owner" />
+			<entry name="malr" value="painter" />
+			<entry name="foto" value="photographer" />
+			<entry name="dich" value="poet" />
+			<entry name="druc" value="printer" />
+			<entry name="rela" value="relatedPerson" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rest" value="restorer" />
+			<entry name="bear" value="revisor" />
+			<entry name="vfrd" value="screenwriter" />
+			<entry name="bilh" value="sculptor" />
+			<entry name="saen" value="singer" />
+			<entry name="spon" value="sponsorOrPatron" />
+			<entry name="reda" value="subeditor" />
+			<entry name="them" value="topic" />
+			<entry name="uebe" value="translator" />
+			<entry name="komm" value="writerOfAddedCommentary" />
+		</map>
+		<map name="rel_code_u_510">
+			<entry name="kueg" value="accreditedArtist" />
+			<entry name="autg" value="accreditedAuthor" />
+			<entry name="komg" value="accreditedComposer" />
+			<entry name="adre" value="addressee" />
+			<entry name="anno" value="annotator" />
+			<entry name="arra" value="arranger" />
+			<entry name="kuen" value="artist" />
+			<entry name="auta" value="author" />
+			<entry name="stif" value="benefactor" />
+			<entry name="gest" value="bookdesigner" />
+			<entry name="kart" value="cartographer" />
+			<entry name="feie" value="celebratedCorporateBody" />
+			<entry name="chre" value="choreographer" />
+			<entry name="kuez" value="citedArtist" />
+			<entry name="autz" value="citedAuthor" />
+			<entry name="komz" value="citedComposer" />
+			<entry name="saml" value="collector" />
+			<entry name="koma" value="composer" />
+			<entry name="leih" value="conferrer" />
+			<entry name="bete" value="contributingCorp" />
+			<entry name="kopi" value="copist" />
+			<entry name="urhe" value="creator" />
+			<entry name="kura" value="curator" />
+			<entry name="widm" value="dedicatee" />
+			<entry name="desi" value="designer" />
+			<entry name="regi" value="director" />
+			<entry name="kame" value="directorOfPhotography" />
+			<entry name="kuew" value="doubtfulArtist" />
+			<entry name="autw" value="doubtfulAuthor" />
+			<entry name="komw" value="doubtfulComposer" />
+			<entry name="hrsg" value="editor" />
+			<entry name="grav" value="engraver" />
+			<entry name="radi" value="etcher" />
+			<entry name="autf" value="fictitiousAuthor" />
+			<entry name="kue1" value="firstArtist" />
+			<entry name="aut1" value="firstAuthor" />
+			<entry name="kom1" value="firstComposer" />
+			<entry name="befr" value="formerOwner" />
+			<entry name="illu" value="illustrator" />
+			<entry name="verr" value="initiator" />
+			<entry name="libr" value="librettist" />
+			<entry name="lith" value="lithographer" />
+			<entry name="hers" value="manufacturer" />
+			<entry name="besi" value="owner" />
+			<entry name="malr" value="painter" />
+			<entry name="foto" value="photographer" />
+			<entry name="dich" value="poet" />
+			<entry name="druc" value="printer" />
+			<entry name="rela" value="relatedCorporateBody" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="rest" value="restorer" />
+			<entry name="vfrd" value="screenwriter" />
+			<entry name="bilh" value="sculptor" />
+			<entry name="saen" value="singer" />
+			<entry name="spon" value="sponsor" />
+			<entry name="reda" value="subeditor" />
+			<entry name="them" value="topic" />
+			<entry name="uebe" value="translator" />
+			<entry name="komm" value="writerOfAddedCommentary" />
+		</map>
+		<map name="rel_code_u_511">
+			<entry name="rela" value="relatedConferenceOrEvent" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_u_530">
+			<entry name="werk" value="accordingWork" />
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="vorl" value="literarySource" />
+			<entry name="anla" value="occasion" />
+			<entry name="vorg" value="precedingWork" />
+			<entry name="vbal" value="related" />
+			<entry name="rela" value="related" />
+			<entry name="nach" value="succeeding" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_u_550">
+			<entry name="obin" value="broaderTermInstantial" />
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="obmo" value="broaderTermWithMoreThanOneElement" />
+			<entry name="obal" value="broderTerm" />
+			<entry name="feie" value="celebrated" />
+			<entry name="anla" value="occasion" />
+			<entry name="rela" value="related" />
+			<entry name="vbal" value="related" />
+			<entry name="spon" value="sponsor" />
+			<entry name="them" value="topic" />
+		</map>
+		<map name="rel_code_u_551">
+			<entry name="obpa" value="broaderTermPartitive" />
+			<entry name="ortb" value="placeOfCustody" />
+			<entry name="ortf" value="placeOfDiscovery" />
+			<entry name="orth" value="placeOfManufacture" />
+			<entry name="rela" value="relatedPlace" />
+			<entry name="geoa" value="relatedPlace" />
+			<entry name="vbal" value="relatedTerm" />
+			<entry name="them" value="topic" />
+		</map>
+
+		<mapfile name="countries" files="mapping/DNBcountries.txt"/>
+	
+	</maps>
+</metamorph>

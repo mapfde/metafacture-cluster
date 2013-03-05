@@ -1,0 +1,7 @@
+default data = "src/test/resources/sampleBVB.mrc";
+
+data|
+open("file")|
+read("marc21")|
+encode("pretty-print")|
+write("stdout");

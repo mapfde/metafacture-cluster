@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name></name>
+	</meta>
+	<rules>
+
+
+
+		<group name="conflictDeath">
+			<data name="death" source="rdaGr2:dateOfDeath" />
+
+			<data name="wiki" source="dewp_cat">
+				<regexp match="^[gG]estorben\W*(\d+)" format="${1}" />
+			</data>
+			<postprocess>
+				<unique />
+			</postprocess>
+		</group>
+
+
+		<group name="conflictBirth">
+
+			<data name="birth" source="rdaGr2:dateOfBirth" />
+
+
+			<data name="wiki" source="dewp_cat">
+				<regexp match="^[gG]eboren\W*(\d+)" format="${1}" />
+			</data>
+			<postprocess>
+				<unique />
+			</postprocess>
+
+		</group>
+	</rules>
+
+</metamorph>

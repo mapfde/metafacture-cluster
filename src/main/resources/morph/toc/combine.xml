@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>Online Resource and Bundle info for TOCII</name>
+	</meta>
+	<rules>
+		<data source="cg:bundledIn" name="_id" />
+		<choose>
+		
+			<combine name="data" value="${id}:${value}" >
+				<data source="data" name="value" />
+				<data source="_id" name="id" />
+				<data source="cg:bundledIn" />
+			</combine>
+
+			<combine name="missing" value="${id}">
+				<data source="_id" name="id" />
+				<data source="cg:bundledIn" />
+			</combine>
+			
+		</choose>
+
+	</rules>
+
+</metamorph>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>counts material types</name>
+	</meta>
+	<rules>
+		<combine name="" value="${pre}-${mat}${form}" flushWith="record">
+			<data name="mat" source="cg:material" />
+
+			<data name="form" source="cg:form">
+				<lookup>
+					<entry name="a" value="microfilm" />
+					<entry name="b" value="microfiche" />
+					<entry name="c" value="microopaque" />
+					<entry name="d" value="large print" />
+					<entry name="f" value="braille" />
+					<entry name="o" value="online" />
+					<entry name="q" value="direct electronic" />
+					<entry name="r" value="print" />
+					<entry name="s" value="electronic" />
+					<entry name="|" value="undef" />
+					<entry name=" " value="undef" />
+				</lookup>
+				<compose prefix="-" />
+			</data>
+
+			<data name="pre" source="_id">
+				<substring end="3" />
+			</data>
+
+		</combine>
+	</rules>
+</metamorph>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>CSV with count data</name>
+	</meta>
+	<rules>
+		<combine name="" value="${count};${idn};${name}">
+			<choose name="count">
+				<data source="dnb" name="count" />
+				<data source="_id">
+					<constant value="0" />
+				</data>
+			</choose>
+			<data source="_id" name="idn" />
+			<choose name="name">
+				<data source="aform" />
+				<data source="_id">
+					<constant value="" />
+				</data>
+			</choose>
+			<data source="katlevel">
+				<equals string="1" />
+			</data>
+		</combine>
+
+	</rules>
+</metamorph>

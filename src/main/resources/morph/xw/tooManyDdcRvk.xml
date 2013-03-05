@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+
+	<rules>
+
+		<choose>
+			<data source="cg:ddc">
+				<count/>
+			</data>
+			<postprocess>
+				<regexp match="\d\d.*" />
+			</postprocess>
+		</choose>
+		
+		<choose>
+			<data source="cg:rvk">
+				<count/>
+			</data>
+			<postprocess>
+				<regexp match="\d\d.*" />
+			</postprocess>
+		</choose>
+
+	</rules>
+
+</metamorph>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>all literal names</name>
+	</meta>
+	<rules>
+
+		<combine name="" value="${pre}-${rel}">
+			<data name="pre" source="_id">
+				<substring end="3" />
+			</data>
+			<choose flushWith="cg:creator" name="rel">
+				<data source="cg:creator.rel" />
+				<data source="cg:creator">
+					<constant value="missing"/>
+				</data>
+			</choose>
+		</combine>
+	</rules>
+</metamorph>
