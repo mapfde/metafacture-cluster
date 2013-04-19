@@ -35,7 +35,10 @@ import org.culturegraph.mf.cluster.sink.ComplexPutWriter;
 import org.culturegraph.mf.cluster.util.AbstractJobLauncher;
 import org.culturegraph.mf.cluster.util.Column;
 import org.culturegraph.mf.cluster.util.ConfigConst;
+import org.culturegraph.mf.mediawiki.analyzer.MultiAnalyzer;
+import org.culturegraph.mf.mediawiki.converter.xml.WikiXmlHandler;
 import org.culturegraph.mf.morph.Metamorph;
+import org.culturegraph.mf.stream.converter.xml.XmlDecoder;
 
 /**
  * Reads a Wikipedia dump into an {@link HTable}. Links and PND references are
@@ -84,11 +87,11 @@ public final class WikipediaIngest extends AbstractJobLauncher {
 
 		private static final String WIKIPEDIA = "Wikipedia";
 		private static final String ANALYZER_CONFIG = "mediawiki/analyzer.conf";
-		private WikiStreamAnalyzer wikiAnalyzer;
+		//private MultiAnalyzer wikiAnalyzer;
 		//private Metamorph metamorph;
 		private final ComplexPutWriter putWriter = new ComplexPutWriter();
 		private boolean storeRawData;
-
+		private final XmlDecoder xmlDecoder = new XmlDecoder();
 		private HTable htable;
 
 
@@ -97,8 +100,10 @@ public final class WikipediaIngest extends AbstractJobLauncher {
 		protected void setup(final Context context) throws IOException, InterruptedException {
 			super.setup(context);
 			
+			
+			
 			final Configuration conf = context.getConfiguration();
-			wikiAnalyzer = new WikiStreamAnalyzer(ANALYZER_CONFIG);
+			final MultiAnalyzer wikiAnalyzer = new MultiAnalyzer(ANALYZER_CONFIG);
 			storeRawData = conf.getBoolean(ConfigConst.STORE_RAW_DATA, false);
 
 			if(conf.get(ConfigConst.MORPH_DEF)==null){
@@ -106,7 +111,8 @@ public final class WikipediaIngest extends AbstractJobLauncher {
 			}else{
 				wikiAnalyzer.setReceiver(new Metamorph(conf.get(ConfigConst.MORPH_DEF))).setReceiver(putWriter);
 			}
-
+			xmlDecoder.setReceiver(new WikiXmlHandler()).setReceiver(wikiAnalyzer);
+			
 			htable = new HTable(conf, conf.get(ConfigConst.OUTPUT_TABLE));
 			htable.setAutoFlush(false);
 		}
@@ -124,7 +130,8 @@ public final class WikipediaIngest extends AbstractJobLauncher {
 		public void map(final LongWritable row, final Text value, final Context context) throws IOException {
 			context.getCounter(WIKIPEDIA, "articles processed").increment(1);
 		
-			wikiAnalyzer.process(new StringReader(value.toString()));
+			
+			xmlDecoder.process(new StringReader(value.toString()));
 						
 			final Put put = putWriter.getCurrentPut();
 			if(put==null){
