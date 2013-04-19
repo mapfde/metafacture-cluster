@@ -5,12 +5,14 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: Culturegraph
+    Checkstyle-Configuration: Metafacture
     Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
+  <property name="charset" value="UTF-8"/>
   <module name="TreeWalker">
+    <module name="FileContentsHolder"/>
     <module name="ClassTypeParameterName"/>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
@@ -50,7 +52,7 @@
     <module name="IllegalCatch"/>
     <module name="IllegalThrows"/>
     <module name="IllegalToken">
-      <property name="tokens" value="POST_INC,POST_DEC,LITERAL_SWITCH"/>
+      <property name="tokens" value="POST_INC,POST_DEC"/>
     </module>
     <module name="IllegalTokenText"/>
     <module name="IllegalType">
@@ -64,7 +66,9 @@
     <module name="MagicNumber"/>
     <module name="MissingSwitchDefault"/>
     <module name="ModifiedControlVariable"/>
-    <module name="MultipleStringLiterals"/>
+    <module name="MultipleStringLiterals">
+      <property name="ignoreStringsRegexp" value="^&quot;.?.?&quot;$"/>
+    </module>
     <module name="MultipleVariableDeclarations"/>
     <module name="NoClone"/>
     <module name="NoFinalizer"/>
@@ -105,6 +109,26 @@
     <module name="MethodLength"/>
     <module name="CyclomaticComplexity"/>
     <module name="Regexp"/>
+    <module name="JavadocType"/>
   </module>
-  <module name="StrictDuplicateCode"/>
+  <module name="StrictDuplicateCode">
+  	<property name="fileExtensions" value="java"/>
+  </module>
+  <module name="Header">
+    <property name="headerFile" value="${basedir}/quality_assurance/java-header.txt"/>
+    <property name="fileExtensions" value="java"/>
+  </module>
+  <module name="SuppressionFilter">
+    <property name="file" value="${basedir}/quality_assurance/checkstyle-suppressions.xml"/>
+  </module>
+  <module name="SuppressionCommentFilter">
+    <property name="offCommentFormat" value="CHECKSTYLE OFF\: ([\w\|]+)"/>
+    <property name="onCommentFormat" value="CHECKSTYLE ON\: ([\w\|]+)"/>
+    <property name="checkFormat" value="$1"/>
+  </module>
+  <module name="SuppressWithNearbyCommentFilter">
+    <property name="commentFormat" value="NO CHECKSTYLE ([\w\|]+) FOR ([+-]?\d+) LINES:"/>
+    <property name="checkFormat" value="$1"/>
+    <property name="influenceFormat" value="$2"/>
+  </module>
 </module>
