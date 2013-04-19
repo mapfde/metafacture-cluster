@@ -6,4 +6,4 @@ then
   exit 65
 fi
 
-hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.cluster.job.merge.Union -D cg.morphdef=matching/$2 -D cg.input.table=$1 -D cg.output.table=$3
+hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.mf.cluster.job.merge.Union -D cg.morphdef=matching/$2 -D cg.input.table=$1 -D cg.output.table=$3

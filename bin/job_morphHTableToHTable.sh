@@ -7,4 +7,4 @@ then
 fi
 
 
-hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.cluster.job.stat.HTableMorph -D cg.morphdef=statistics/$2 -D cg.input.table=$1 -D cg.output.path=$3 -D cg.to_table=true -D mapred.reduce.tasks=4
+hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.mf.cluster.job.stat.HTableMorph -D cg.morphdef=statistics/$2 -D cg.input.table=$1 -D cg.output.path=$3 -D cg.to_table=true -D mapred.reduce.tasks=4

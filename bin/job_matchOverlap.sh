@@ -7,6 +7,6 @@ then
 fi
 
 hadoop fs -rm -r out/$1/overlap/
-hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.cluster.job.match.MatchOverlap -D cg.input.table=$1 -D cg.output.path=out/$1/overlap
+hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.mf.cluster.job.match.MatchOverlap -D cg.input.table=$1 -D cg.output.path=out/$1/overlap
 
  

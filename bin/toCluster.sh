@@ -8,4 +8,4 @@ fi
 
 
 mvn clean assembly:assembly
-scp target/cluster*-job.jar $1:jobs/
+scp target/*-job.jar $1:jobs/

@@ -8,4 +8,4 @@ then
 fi
 
 
-hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.cluster.job.ingest.PetrusIngest -D cg.output.table=$2 -D cg.input.path=$1
+hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.mf.cluster.job.ingest.PetrusIngest -D cg.output.table=$2 -D cg.input.path=$1

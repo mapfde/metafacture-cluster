@@ -18,5 +18,5 @@ else
 fi
 
 
-hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.cluster.job.stat.HTableMorph -D mapreduce.job.reduces=$R -D mapreduce.map.speculative=false -D cg.morphdef=$2 -D cg.input.table=$1 -D cg.output.$3=$output
+hadoop jar $HOME/jobs/$CULTUREGRAPH_JOB_JAR org.culturegraph.mf.cluster.job.stat.HTableMorph -D mapreduce.job.reduces=$R -D mapreduce.map.speculative=false -D cg.morphdef=$2 -D cg.input.table=$1 -D cg.output.$3=$output
 
