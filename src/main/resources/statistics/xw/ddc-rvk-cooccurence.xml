@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1">
+
+	<meta>
+		<name>DDC - RVK</name>
+	</meta>
+	<rules>
+
+		<data source="cg:rvk" name="@rvk">
+			<case to="upper" />
+			<replace pattern="\W" with="" />
+			<regexp match="[A-Z][A-Z]\d\d\d\d?\d?" />
+			<occurrence only="1" />
+		</data>
+		<data source="cg:ddc" name="@ddc">
+			<replace pattern="[^\d]" with="" />
+			<not-equals string="" />
+			<occurrence only="1" />
+		</data>
+
+		<combine name="" value="${pref}$ddc-and-rvk">
+			<data name="pref" source="_id">
+				<substring end="3" />
+			</data>
+			<data source="@ddc" />
+			<data source="@rvk" />
+		</combine>
+
+		<combine name="" value="ALL$ddc-and-rvk">
+			<data source="@ddc" />
+			<data source="@rvk" />
+		</combine>
+
+	</rules>
+</metamorph>
