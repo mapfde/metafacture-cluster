@@ -1,9 +1,6 @@
 default host = "borges";
-default alg = "ntcy";
+default table = "ntcy";
 
-"b-" + alg + "/scanner" | from-hbase(host) |
+table + "/scanner" | from-hbase(host) |
 filter("indexing/bundlefilter.xml")|
-//morph("indexing/datastore.xml")|
-//encode("pretty-print")|
-//write("stdout");
-stream-to-index("indexing/datastore.xml", indexpath="G://" + alg + "_ix");
+stream-to-index(FLUX_DIR + "../../../main/resources/indexing/datastore.xml", indexpath= table + "_ix");
