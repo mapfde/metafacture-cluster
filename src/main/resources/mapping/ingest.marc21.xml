@@ -286,6 +286,7 @@
 		</entity>
 
 		<data name="cg:ddc" source="082??.a|083??.a|085??.a" />
+		<data name="cg:udc" source="080??.a" />
 
 		<combine name="cg:${type}" value="${value}" reset="true"
 			sameEntity="true">

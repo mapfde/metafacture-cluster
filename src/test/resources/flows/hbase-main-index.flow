@@ -3,4 +3,5 @@ default host = "borges";
 
 table + "/scanner" 
 |from-hbase(host)
-|stream-to-index("D://workspace/org.culturegraph.cluster/src/main/resources/indexing/datastore.xml", indexpath="F://cg_ix");
+|batch-log(batchsize="100000")
+|stream-to-index(FLUX_DIR + "../../../main/resources/indexing/datastore.xml", indexpath= table + "_ix");

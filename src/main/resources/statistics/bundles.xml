@@ -13,10 +13,6 @@
 				<count />
 			</data>
 		</choose>
-
-<!-- 	<data source="@size" name="size"> -->
-<!-- 		<not-equals string="1"/> -->
-<!-- 	</data> -->
 		
 
 		<data name="@algorithm" source="_id">
@@ -60,8 +56,6 @@
 				<buffer />
 			</data>
 		</combine>
-
-
 
 	</rules>
 </metamorph>
