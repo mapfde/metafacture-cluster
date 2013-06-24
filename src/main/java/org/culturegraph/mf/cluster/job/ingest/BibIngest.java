@@ -35,8 +35,6 @@ import org.culturegraph.mf.cluster.sink.ComplexPutWriter;
 import org.culturegraph.mf.cluster.util.AbstractJobLauncher;
 import org.culturegraph.mf.cluster.util.Column;
 import org.culturegraph.mf.cluster.util.ConfigConst;
-import org.culturegraph.mf.framework.DefaultSender;
-import org.culturegraph.mf.framework.StreamReceiver;
 import org.culturegraph.mf.morph.Metamorph;
 import org.culturegraph.mf.morph.MorphErrorHandler;
 import org.culturegraph.mf.stream.reader.MultiFormatReader;
@@ -102,7 +100,7 @@ public final class BibIngest extends AbstractJobLauncher {
 		private static final long WRITE_BUFFER = 1024 * 1024 * 16;
 
 		private Reader reader;
-		private final ComplexPutWriter collector = new ComplexPutWriter();
+		private ComplexPutWriter collector;
 		private HTable htable;
 		private byte[] format;
 		private boolean storeRawData;
@@ -116,16 +114,15 @@ public final class BibIngest extends AbstractJobLauncher {
 			storeRawData = conf.getBoolean(ConfigConst.STORE_RAW_DATA, false);
 			format = conf.get(ConfigConst.FORMAT).getBytes();
 			reader = new MultiFormatReader(conf.get(ConfigConst.FORMAT));
+			collector = new ComplexPutWriter();
+			collector.setIdPrefix(conf.get(ConfigConst.INGEST_PREFIX, ""));
 			final Metamorph metamorph = new Metamorph(conf.get(ConfigConst.MORPH_DEF));
 			metamorph.setErrorHandler(this);
 			reader.setReceiver(metamorph);
 
-			final String prefix = conf.get(ConfigConst.INGEST_PREFIX, "");
-			if (prefix.isEmpty()) {
-				metamorph.setReceiver(collector);
-			} else {
-				metamorph.setReceiver(new PrefixAdder(prefix)).setReceiver(collector);
-			}
+	
+			metamorph.setReceiver(collector);
+
 
 			htable = new HTable(conf, conf.get(ConfigConst.OUTPUT_TABLE));
 			htable.setAutoFlush(false);
@@ -190,39 +187,41 @@ public final class BibIngest extends AbstractJobLauncher {
 		}
 	}
 
-	private static final class PrefixAdder extends DefaultSender<StreamReceiver> implements StreamReceiver {
-
-		private final String prefix;
-
-		public PrefixAdder(final String prefix) {
-			super();
-			this.prefix = prefix;
-		}
-
-		@Override
-		public void startRecord(final String identifier) {
-			getReceiver().startRecord(prefix + identifier);
-		}
-
-		@Override
-		public void endRecord() {
-			getReceiver().endRecord();
-		}
-
-		@Override
-		public void startEntity(final String name) {
-			getReceiver().startEntity(name);
-		}
-
-		@Override
-		public void endEntity() {
-			getReceiver().endEntity();
-		}
-
-		@Override
-		public void literal(final String name, final String value) {
-			getReceiver().literal(name, value);
-
-		}
-	}
+//	private static final class PrefixAdder extends DefaultSender<StreamReceiver> implements StreamReceiver {
+//
+//		private final String prefix;
+//
+//		public PrefixAdder(final String prefix) {
+//			super();
+//			this.prefix = prefix;
+//		}
+//
+//		@Override
+//		public void startRecord(final String identifier) {
+//			getReceiver().startRecord(prefix + identifier);
+//		}
+//
+//		@Override
+//		public void endRecord() {
+//			getReceiver().endRecord();
+//		}
+//
+//		@Override
+//		public void startEntity(final String name) {
+//			getReceiver().startEntity(name);
+//		}
+//
+//		@Override
+//		public void endEntity() {
+//			getReceiver().endEntity();
+//		}
+//
+//		@Override
+//		public void literal(final String name, final String value) {
+//			getReceiver().literal(name, value);
+//
+//		}
+//		
+//		
+//	}
 }

@@ -51,11 +51,12 @@ public final class ComplexPutWriter extends DefaultStreamReceiver implements Col
 	private static final String ID_NAME = "_id";
 	private Put currentPut;
 	private final List<byte[]> buffer = new ArrayList<byte[]>();
-	private byte[] identifier;
+	private String identifier;
 	private Collection<Put> collection;
 
 	private StringBuilder entityBuilder;
 	private int entityDepth;
+	private String idPrefix = "";
 
 	public ComplexPutWriter(final Collection<Put> collection) {
 		super();
@@ -78,9 +79,8 @@ public final class ComplexPutWriter extends DefaultStreamReceiver implements Col
 		entityDepth = 0;
 		this.identifier = null;
 		if (identifier != null) {
-			this.identifier = identifier.getBytes(Charsets.UTF_8);
+			this.identifier = identifier;
 		}
-
 	}
 
 	@Override
@@ -88,7 +88,6 @@ public final class ComplexPutWriter extends DefaultStreamReceiver implements Col
 		if (entityBuilder == null) {
 			entityBuilder = new StringBuilder();
 			entityDepth = 0;
-
 			entityBuilder.append(CGEntity.FIELD_DELIMITER);
 
 		}
@@ -116,7 +115,7 @@ public final class ComplexPutWriter extends DefaultStreamReceiver implements Col
 			throw new MissingIdException("No id found");
 		}
 
-		final Put put = new Put(identifier);
+		final Put put = new Put( (idPrefix + identifier).getBytes(Charsets.UTF_8));
 		for (byte[] qualifier : buffer) {
 			put.add(Column.Family.PROPERTY, qualifier, NOTHING);
 		}
@@ -133,7 +132,7 @@ public final class ComplexPutWriter extends DefaultStreamReceiver implements Col
 		if (name != null && value != null) {
 			if (entityBuilder == null) {
 				if (name.equals(ID_NAME)) {
-					identifier = value.getBytes(Charsets.UTF_8);
+					identifier = value;
 				} else {
 					buffer.add(buildQualifier(name, value));
 				}
@@ -194,5 +193,10 @@ public final class ComplexPutWriter extends DefaultStreamReceiver implements Col
 	public static void write(final Put put, final String name, final String value) {
 		put.add(Column.Family.PROPERTY, buildQualifier(name, value), NOTHING);
 
+	}
+
+	public void setIdPrefix(final String string) {
+		idPrefix  = string;
+		
 	}
 }
