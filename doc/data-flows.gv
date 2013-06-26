@@ -1,0 +1,113 @@
+digraph dataflows {
+node [shape=folder, style=filled, fillcolor=tomato, fontsize=12];  
+t1 [label="title data 1"];
+t2 [label="title data 2"];
+beacons [label="beacon files"];
+wiki [label="wikipedia dump"];
+gnd [label="GND dump"];
+
+node [shape=ellipse, style="filled,bold", fillcolor=violet, fontsize=10];  
+rt [label="title table"];
+mt [label="match table [ALG]"];
+
+node [shape=ellipse, style="filled,bold, dashed", fillcolor=violet, fontsize=10];  
+toct [label="enriched bundles for TOCII"];
+
+
+node[shape=component, style=filled, fillcolor=limegreen, fontsize=10]
+portal [label="portal"]
+
+node[shape=note, style=filled, fillcolor=violet, fontsize=10]
+ovstat [label="overlap statistics [ALG]"]
+bstat [label="bundle size statistics [ALG]"]
+rstat [label="record statistics"]
+
+node[shape=note, style=filled, fillcolor=lightskyblue, fontsize=10]
+rix [label="record index"]
+bix [label="bundle index for [ALG]"]
+gndix [label="GND index"]
+png [label="[ALG].png"]
+
+node[shape=note, style=filled, fillcolor=white, fontsize=10]
+alg [label="matching/algs/[ALG].xml"]
+indexs [label="index/datastore.xml"]
+vinfo [label="verbund info"]
+ainfo [label="match alg info"]
+
+node [shape=box, style=filled, fillcolor=violet, fontsize=10];  
+in [label="job_cgIngest.sh"]
+match [label="job_match.sh, job_union.sh"]
+overlap [label="job_matchOverlap.sh"]
+bundlec [label="job_countInHTable.sh bundles.xml"]
+recc [label="job_countInHTable.sh allProperties.xml"]
+
+node [shape=box, style=filled, fillcolor=lightskyblue, fontsize=10];  
+ixr [label="index-records.flux"]
+ixm [label="index-bundles.flux"]
+ixgnd [label="generate-gnd-index.flux"]
+morphvis [label="java org.culturegraph.mf.morph.MorphVis"]
+
+
+node [shape=box, style="dashed,filled" fillcolor=violet, fontsize=10];  
+tocenr [label ="job_morphHTable.sh morph/toc/tocExtract.xml,morph/toc/tocCombine.xml"]
+
+node [shape=box, style="dashed,filled" fillcolor=lightskyblue, fontsize=10];  
+tocflow [label ="toc/toc-enrich.flow"]
+
+node [shape=note, style="dashed,filled" fillcolor=limegreen, fontsize=10];  
+tocresult [label ="TOC exchange list"]
+
+rt -> tocenr
+mt -> tocenr
+tocenr -> toct
+toct -> tocflow
+tocflow -> tocresult
+
+gnd->ixgnd
+wiki->ixgnd
+indexs -> ixgnd
+ixgnd->gndix
+gndix->portal
+
+alg -> morphvis
+morphvis -> png
+png -> portal
+
+beacons -> portal
+
+t1 -> in;
+t2 -> in;
+in -> rt;
+
+rt ->ixr
+indexs -> ixr
+ixr -> rix
+rix -> portal
+
+rt -> match
+alg -> match
+
+match -> mt
+mt->ixm
+indexs->ixm
+ixm -> bix
+bix -> portal
+
+mt->overlap
+overlap -> ovstat
+ovstat -> portal
+
+mt->bundlec
+bundlec -> bstat
+bstat -> portal
+
+rt->recc
+recc->rstat
+rstat -> portal
+
+vinfo -> portal
+ainfo -> portal
+
+overlap=false
+
+}
