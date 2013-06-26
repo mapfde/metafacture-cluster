@@ -1,8 +1,0 @@
-default table = "test";
-default host = "borges";
-
-
-table + "/scanner" | from-hbase(host) | 
-morph("morph/tocExtract.xml")|
-encode("pretty-print")|
-write("stdout");

@@ -1,0 +1,10 @@
+default table = "cg-gnd-stat";
+default dump = "C:/bib_data/T-saetze.pica.gz";
+default host = "borges";
+
+dump| 
+open-file|
+as-lines|
+decode-pica|
+morph("../../resources/morph/subj/GNDsimple.xml")|
+to-hbase(table +"@"+ host);

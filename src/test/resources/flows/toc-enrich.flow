@@ -1,8 +1,0 @@
-default table = "cg-toc";
-default out = "file://D:/tocEnrichSum.txt";
-default encode = "literals";
-
-table + "/scanner" | from-hbase(host) | 
-morph("morph/toc/tocEnrich.xml")|
-encode(encode)|
-write(out);

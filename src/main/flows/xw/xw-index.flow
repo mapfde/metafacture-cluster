@@ -1,0 +1,11 @@
+
+one = "cg:"+source;
+two = "cg:"+target;
+
+table = "cg-" + source;
+index = "ix-" + source + "-" + target;
+
+table + "/scanner" | 
+from-hbase(host) | 
+morph(FLUX_DIR + "../../resources/morph/xw/index.xml", *)|
+stream-to-simpleindex(indexPath="D://" + index, ramBuffer="700");

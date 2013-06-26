@@ -1,0 +1,13 @@
+default idnfile = FLUX_DIR + "../../ingest-idns.txt";
+default table = "test";
+default host = "borges";
+
+idnfile|
+open|
+as-lines|
+template("https://portal.dnb.de/opac.htm?method=requestMarcXml&idn=${obj}")|
+open-http|
+decode-xml|
+handle-marcxml|
+morph(FLUX_DIR + "../../../../main/resources/mapping/ingest.marc21.xml")|
+to-hbase(table + "@" + host);

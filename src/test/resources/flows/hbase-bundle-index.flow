@@ -1,6 +1,0 @@
-default host = "borges";
-default table = "ntcy";
-
-table + "/scanner" | from-hbase(host) |
-filter("indexing/bundlefilter.xml")|
-stream-to-index(FLUX_DIR + "../../../main/resources/indexing/datastore.xml", indexpath= table + "_ix");

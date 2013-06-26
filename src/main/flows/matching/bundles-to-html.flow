@@ -1,0 +1,9 @@
+default table = "dnb-wrk";
+default out = "stdout";
+
+table + "/scanner" | from-hbase(host) | 
+morph(FLUX_DIR + "../../resources/morph/DNBbundlesToHtml.xml")|
+stream-to-triples|
+template("${o}")|
+draw-uniform-sample("400")|
+write(out);

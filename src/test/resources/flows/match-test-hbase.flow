@@ -1,9 +1,0 @@
-default table = "cg";
-default host = "borges";
-default id = "GBV-026658208";
-default alg = "ntcy";
-
-table + "/row/" + id | from-hbase(host) | 
-morph("matching/algs/"+alg+".xml")|
-encode("pretty-print")|
-write("stdout");

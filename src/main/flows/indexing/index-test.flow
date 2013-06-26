@@ -1,0 +1,7 @@
+default id = "DNB-997724587";
+
+"test/row/" + id|
+from-hbase("borges")|
+morph("../../resources/indexing/datastore.xml")|
+encode("pretty-print")|
+write("stdout");

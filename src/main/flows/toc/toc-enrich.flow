@@ -1,0 +1,8 @@
+default table = "cg-toc";
+default out = "file://D:/tocEnrichSum.txt";
+default encode = "literals";
+
+table + "/scanner" | from-hbase(host) | 
+morph(FLUX_DIR + "../../resources/morph/toc/tocEnrich.xml")|
+encode(encode)|
+write(out);

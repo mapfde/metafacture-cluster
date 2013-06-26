@@ -1,7 +1,0 @@
-default table = "cg";
-default host = "borges";
-
-table + "/scanner" 
-|from-hbase(host)
-|batch-log(batchsize="100000")
-|stream-to-index(FLUX_DIR + "../../../main/resources/indexing/datastore.xml", indexpath= table + "_ix");

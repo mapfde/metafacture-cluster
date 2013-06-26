@@ -1,9 +1,0 @@
-default table = "dnb-wrk";
-default out = "file://D:/" + table + ".html";
-//out = "stdout";
-
-table + "/scanner" | from-hbase(host) | 
-morph("morph/DNBbundlesToHtml.xml")|
-encode("literals")|
-draw-uniform-sample("400")|
-write(out);

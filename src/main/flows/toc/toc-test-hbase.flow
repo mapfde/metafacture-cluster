@@ -1,0 +1,9 @@
+default table = "test";
+default host = "borges";
+
+
+table + "/scanner" | from-hbase(host) | 
+morph(FLUX_DIR + "../../resources/morph/tocExtract.xml")|
+stream-to-triples|
+template("${o}")|
+write("stdout");
