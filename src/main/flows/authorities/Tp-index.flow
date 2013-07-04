@@ -1,0 +1,28 @@
+default gnd-dump = "C:/bib_data/Tp-saetze.pica.gz";
+default wiki-dump = "C:/bib_data/dewiki-20130219-pages-articles.xml.bz2";
+default base = "F://";
+
+wiki-dump| 
+open-file|
+decode-xml|
+handle-wiki-xml|
+analyze-wiki-authorities|
+morph(FLUX_DIR + "dewiki-redirect.xml")|
+stream-to-triples(redirect="true")|
+@X;
+
+
+gnd-dump| 
+open-file|
+as-lines|
+decode-pica|
+morph(FLUX_DIR + "../../resources/mapping/gnd_pers.pica.xml")|
+stream-to-triples|
+@X;
+
+
+@X|
+sort-triples(by="subject")|
+collect-triples|
+filter(FLUX_DIR + "../../resources/indexing/pndfilter.xml")|
+stream-to-index(FLUX_DIR + "../../resources/indexing/datastore.xml", indexpath= base + "gnd_ix", rambuffer="700");

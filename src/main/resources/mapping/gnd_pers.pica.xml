@@ -230,7 +230,7 @@
 	</rules>
 
 	<maps>
-		<mapfile name="instruments_voices" files="mapping/instruments.txt"/>
+		<filemap name="instruments_voices" files="mapping/instruments.txt"/>
 			
 
 		<map name="rel_code_b_500">
@@ -748,7 +748,7 @@
 			<entry name="them" value="topic" />
 		</map>
 
-		<mapfile name="countries" files="mapping/DNBcountries.txt"/>
+		<filemap name="countries" files="mapping/DNBcountries.txt"/>
 	
 	</maps>
 </metamorph>

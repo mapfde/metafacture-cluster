@@ -1,6 +1,7 @@
 default host = "borges";
 default table = "ntcy";
+default base = "";
 
 table + "/scanner" | from-hbase(host) |
 filter(FLUX_DIR + "../../resources/indexing/bundlefilter.xml")|
-stream-to-index(FLUX_DIR + "../../resources/indexing/datastore.xml", indexpath= table + "_ix", rambuffer="700");
+stream-to-index(FLUX_DIR + "../../resources/indexing/datastore.xml", indexpath= base + table + "_ix", rambuffer="700");

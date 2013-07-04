@@ -1,6 +1,0 @@
-default host = "borges";
-default table = "gnd";
-
-table + "/scanner" | from-hbase(host) |
-filter(FLUX_DIR + "../../main/resources/indexing/pndfilter.xml")|
-stream-to-index(FLUX_DIR + "../../main/resources/indexing/datastore.xml", indexpath= table + "_ix", rambuffer="700");

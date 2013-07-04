@@ -1,7 +1,10 @@
 default table = "cg";
 default host = "borges";
+default base = "";
 
-table + "/scanner" 
+table + "/scanner?stopRow=DNB" 
 |from-hbase(host)
-|batch-log(batchsize="100000")
-|stream-to-index(FLUX_DIR + "../../main/resources/indexing/datastore.xml", indexpath= table + "_ix", rambuffer="700");
+|stream-to-index(FLUX_DIR + "../../resources/indexing/datastore.xml", indexpath= base + table + "_ix", rambuffer="700");
+//|morph(FLUX_DIR + "../../resources/indexing/datastore.xml")
+//|encode-formeta
+//|write("stdout");

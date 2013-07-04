@@ -21,12 +21,14 @@ node[shape=note, style=filled, fillcolor=violet, fontsize=10]
 ovstat [label="overlap statistics [ALG]"]
 bstat [label="bundle size statistics [ALG]"]
 rstat [label="record statistics"]
+subjstat  [label="subject reference statistics"]
 
 node[shape=note, style=filled, fillcolor=lightskyblue, fontsize=10]
 rix [label="record index"]
 bix [label="bundle index for [ALG]"]
 gndix [label="GND index"]
 png [label="[ALG].png"]
+subjix [label="GND backref index"]
 
 node[shape=note, style=filled, fillcolor=white, fontsize=10]
 alg [label="matching/algs/[ALG].xml"]
@@ -40,13 +42,15 @@ match [label="job_match.sh, job_union.sh"]
 overlap [label="job_matchOverlap.sh"]
 bundlec [label="job_countInHTable.sh bundles.xml"]
 recc [label="job_countInHTable.sh allProperties.xml"]
+subjc [label="job_countInHTable.sh subjReferences.xml"]
+
 
 node [shape=box, style=filled, fillcolor=lightskyblue, fontsize=10];  
 ixr [label="index-records.flux"]
 ixm [label="index-bundles.flux"]
 ixgnd [label="generate-gnd-index.flux"]
 morphvis [label="java org.culturegraph.mf.morph.MorphVis"]
-
+ixsubj [label="gndbackref-index.flux"]
 
 node [shape=box, style="dashed,filled" fillcolor=violet, fontsize=10];  
 tocenr [label ="job_morphHTable.sh morph/toc/tocExtract.xml,morph/toc/tocCombine.xml"]
@@ -56,6 +60,12 @@ tocflow [label ="toc/toc-enrich.flow"]
 
 node [shape=note, style="dashed,filled" fillcolor=limegreen, fontsize=10];  
 tocresult [label ="TOC exchange list"]
+
+rt -> subjc
+subjc -> subjstat
+subjstat->ixsubj
+ixsubj->subjix
+subjix->portal
 
 rt -> tocenr
 mt -> tocenr

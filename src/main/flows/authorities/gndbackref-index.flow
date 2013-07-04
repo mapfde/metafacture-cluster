@@ -1,0 +1,12 @@
+default file = "C:\\bib_data\\_user_geipel_out_cg_subjectRefs.xml_part-r-00000";
+default base = "F:\\";
+
+file| 
+open-file|
+as-lines|
+decode-csv|
+morph(FLUX_DIR + "gndbackref.xml")|
+stream-to-triples(redirect="true")|
+sort-triples(by="subject")|
+collect-triples|
+stream-to-index(indexpath= base + "backref_ix", rambuffer="700");
