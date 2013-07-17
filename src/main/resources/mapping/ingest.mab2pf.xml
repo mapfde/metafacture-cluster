@@ -14,14 +14,14 @@
 		</data>
 
 		<data source="001" name="cg:srcId" />
-        <!--
-        <combine name="cg:partOf" value="${prefix}${data}">
-            <data source="_id" name="prefix" />
+
+        <combine name="cg:partOf" value="swb.mab2-${data}">
             <data source="010" name="data"/>
         </combine>
-        -->
-		<data source="010" name="cg:partOf" />
 
+		<!--
+		    <data source="010" name="cg:partOf" />
+        -->
         <choose name="cg:recordType">
             <data source="076b">
                 <regexp match="^z[dt]" />
